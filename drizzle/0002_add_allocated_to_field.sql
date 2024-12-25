@@ -1,0 +1,1 @@
+ALTER TABLE "tasks" ADD COLUMN "allocated_to" VARCHAR(255);

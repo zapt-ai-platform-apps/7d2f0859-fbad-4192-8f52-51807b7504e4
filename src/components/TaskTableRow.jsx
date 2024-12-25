@@ -14,6 +14,7 @@ function TaskTableRow(props) {
       <td class="border px-4 py-2">{task.status}</td>
       <td class="border px-4 py-2">{task.priority}</td>
       <td class="border px-4 py-2">{task.organisation}</td>
+      <td class="border px-4 py-2">{task.allocatedTo || 'Unassigned'}</td>
       <td class="border px-4 py-2">
         <button
           class={`bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 transition duration-300 ease-in-out cursor-pointer ${allocatingTaskId() === task.id ? 'opacity-50 cursor-not-allowed' : ''}`}

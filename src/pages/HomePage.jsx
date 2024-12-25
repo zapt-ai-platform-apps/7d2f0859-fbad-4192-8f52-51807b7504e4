@@ -54,7 +54,7 @@ function HomePage(props) {
           </button>
         </div>
         <TaskForm onTaskCreated={handleTaskCreated} />
-        <TaskList tasks={tasks()} loading={loading()} />
+        <TaskList tasks={tasks()} loading={loading()} fetchTasks={fetchTasks} />
       </div>
       <a href="https://www.zapt.ai" target="_blank" rel="noopener noreferrer" class="text-gray-500 text-sm mt-8 block text-center">
         Made on ZAPT

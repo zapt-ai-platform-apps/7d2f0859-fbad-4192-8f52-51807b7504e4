@@ -56,6 +56,11 @@ Please log in to view and manage the task.`,
     // Send email
     await resend.emails.send(emailData);
 
+    // Update task with allocatedTo
+    await db.update(tasks)
+      .set({ allocatedTo: recipientEmail })
+      .where(eq(tasks.id, taskId));
+
     res.status(200).json({ message: 'Task allocated successfully' });
   } catch (error) {
     console.error('Error allocating task:', error);

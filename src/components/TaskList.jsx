@@ -52,6 +52,7 @@ function TaskList(props) {
         tasks={filteredTasks}
         loading={props.loading}
         handleSort={handleSort}
+        fetchTasks={props.fetchTasks}
       />
     </div>
   );

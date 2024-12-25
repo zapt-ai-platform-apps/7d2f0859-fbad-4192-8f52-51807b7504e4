@@ -11,7 +11,7 @@ function TaskFilter(props) {
       <select
         value={props.filterField()}
         onInput={(e) => props.setFilterField(e.target.value)}
-        class="p-3 border-t border-b border-gray-300 focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
+        class="p-3 border-t border-b border-gray-300 focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border cursor-pointer"
       >
         <option value="referenceNumber">Reference Number</option>
         <option value="description">Description</option>
@@ -19,6 +19,7 @@ function TaskFilter(props) {
         <option value="status">Status</option>
         <option value="priority">Priority</option>
         <option value="organisation">Organisation</option>
+        <option value="allocatedTo">Allocated To</option>
       </select>
       <button
         onClick={() => props.setFilterText('')}

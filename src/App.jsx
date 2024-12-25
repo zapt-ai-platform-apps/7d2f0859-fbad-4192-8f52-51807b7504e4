@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from '@solidjs/router';
+import { Route, Routes, Navigate, useLocation } from '@solidjs/router';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
+      <Route path="/" element={user() ? <Navigate href="/home" /> : <LandingPage />} />
       <Route path="/login" element={user() ? <Navigate href="/home" /> : <LoginPage />} />
       <Route path="/home" element={user() ? <HomePage user={user} /> : <Navigate href="/login" />} />
     </Routes>
