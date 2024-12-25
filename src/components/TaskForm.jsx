@@ -17,6 +17,12 @@ function TaskForm(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    const adjustedFormData = { ...formData() };
+    if (adjustedFormData.dueDate === '') {
+      adjustedFormData.dueDate = null;
+    }
+
     const { data: { session } } = await supabase.auth.getSession();
     try {
       const response = await fetch('/api/createTask', {
@@ -25,7 +31,7 @@ function TaskForm(props) {
           'Authorization': `Bearer ${session.access_token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData())
+        body: JSON.stringify(adjustedFormData)
       });
       if (response.ok) {
         const newTask = await response.json();
