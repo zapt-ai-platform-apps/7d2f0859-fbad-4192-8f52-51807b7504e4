@@ -56,7 +56,7 @@ Organisation: ${task.organisation || 'N/A'}
 
     // Prepare email data
     const emailData = {
-      from: 'no-reply@listapp.com',
+      from: 'no-reply@zapt.ai',
       to: recipientEmail,
       subject: 'Task Report',
       text: `Here is the task report:\n\n${reportContent}`,

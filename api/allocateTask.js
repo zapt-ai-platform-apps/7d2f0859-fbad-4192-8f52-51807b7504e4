@@ -37,7 +37,7 @@ export default async function handler(req, res) {
 
     // Prepare email data
     const emailData = {
-      from: 'no-reply@listapp.com',
+      from: 'no-reply@zapt.ai',
       to: recipientEmail,
       subject: `Task Assignment: ${task.description}`,
       text: `You have been assigned a new task:
