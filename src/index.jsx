@@ -1,4 +1,5 @@
 import { render } from 'solid-js/web';
+import { Router } from '@solidjs/router';
 import App from './App';
 import './index.css';
 import * as Sentry from '@sentry/browser';
@@ -23,4 +24,8 @@ if (!window.location.hostname.includes('vercel.app')) {
   document.head.appendChild(script);
 }
 
-render(() => <App />, document.getElementById('root'));
+render(() => (
+  <Router>
+    <App />
+  </Router>
+), document.getElementById('root'));
