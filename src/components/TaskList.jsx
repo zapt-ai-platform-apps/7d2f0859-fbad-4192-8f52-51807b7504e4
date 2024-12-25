@@ -1,6 +1,7 @@
 import { createSignal, createMemo } from 'solid-js';
 import TaskFilter from './TaskFilter';
 import TaskTable from './TaskTable';
+import SendReport from './SendReport';
 
 function TaskList(props) {
   const [filterText, setFilterText] = createSignal('');
@@ -42,6 +43,10 @@ function TaskList(props) {
         setFilterText={setFilterText}
         filterField={filterField}
         setFilterField={setFilterField}
+      />
+      <SendReport
+        filterText={filterText}
+        filterField={filterField}
       />
       <TaskTable
         tasks={filteredTasks}

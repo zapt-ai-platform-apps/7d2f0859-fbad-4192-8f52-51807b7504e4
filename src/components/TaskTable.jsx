@@ -1,7 +1,43 @@
-import { For, Show } from 'solid-js';
-import { format } from 'date-fns';
+import { For, Show, createSignal } from 'solid-js';
+import { supabase } from '../supabaseClient';
+import TaskTableRow from './TaskTableRow';
 
 function TaskTable(props) {
+  const [allocatingTaskId, setAllocatingTaskId] = createSignal(null);
+
+  const handleAllocateTask = async (taskId) => {
+    const email = prompt('Enter recipient email:');
+    if (!email) return;
+    setAllocatingTaskId(taskId);
+
+    const { data: { session } } = await supabase.auth.getSession();
+    try {
+      const response = await fetch('/api/allocateTask', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${session.access_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          taskId: taskId,
+          recipientEmail: email,
+        }),
+      });
+
+      if (response.ok) {
+        alert('Task allocated successfully');
+      } else {
+        const errorData = await response.json();
+        alert('Error allocating task: ' + errorData.error);
+      }
+    } catch (error) {
+      console.error('Error allocating task:', error);
+      alert('Error allocating task');
+    } finally {
+      setAllocatingTaskId(null);
+    }
+  };
+
   return (
     <div class="overflow-x-auto">
       <table class="min-w-full bg-white rounded-lg shadow-md">
@@ -14,6 +50,7 @@ function TaskTable(props) {
             <th class="px-4 py-2 cursor-pointer" onClick={() => props.handleSort('status')}>Status</th>
             <th class="px-4 py-2 cursor-pointer" onClick={() => props.handleSort('priority')}>Priority</th>
             <th class="px-4 py-2 cursor-pointer" onClick={() => props.handleSort('organisation')}>Organisation</th>
+            <th class="px-4 py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -21,7 +58,7 @@ function TaskTable(props) {
             when={!props.loading}
             fallback={
               <tr>
-                <td colSpan="7" class="text-center p-4">
+                <td colSpan="8" class="text-center p-4">
                   Loading tasks...
                 </td>
               </tr>
@@ -29,17 +66,11 @@ function TaskTable(props) {
           >
             <For each={props.tasks()}>
               {(task) => (
-                <tr class="hover:bg-gray-100">
-                  <td class="border px-4 py-2">{task.referenceNumber}</td>
-                  <td class="border px-4 py-2">{task.description}</td>
-                  <td class="border px-4 py-2">{task.project}</td>
-                  <td class="border px-4 py-2">
-                    {task.dueDate ? format(new Date(task.dueDate), 'yyyy-MM-dd') : ''}
-                  </td>
-                  <td class="border px-4 py-2">{task.status}</td>
-                  <td class="border px-4 py-2">{task.priority}</td>
-                  <td class="border px-4 py-2">{task.organisation}</td>
-                </tr>
+                <TaskTableRow
+                  task={task}
+                  handleAllocateTask={handleAllocateTask}
+                  allocatingTaskId={allocatingTaskId}
+                />
               )}
             </For>
           </Show>

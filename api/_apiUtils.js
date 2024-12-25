@@ -1,11 +1,14 @@
 import { initializeZapt } from '@zapt/zapt-js';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+import { Resend } from 'resend';
 
 const sql = postgres(process.env.COCKROACH_DB_URL);
 export const db = drizzle(sql);
 
 const { supabase } = initializeZapt(process.env.VITE_PUBLIC_APP_ID);
+
+export const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function authenticateUser(req) {
   const authHeader = req.headers.authorization;
