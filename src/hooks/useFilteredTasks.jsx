@@ -2,7 +2,7 @@ import { createMemo } from 'solid-js';
 
 function useFilteredTasks(tasks, filterText, filterField, sortField, sortDirection) {
   const filteredTasks = createMemo(() => {
-    return tasks
+    return tasks()
       .filter((task) => {
         if (filterText() === '') return true;
         const field = task[filterField()];
