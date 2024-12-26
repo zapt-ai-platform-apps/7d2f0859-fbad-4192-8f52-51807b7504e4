@@ -36,6 +36,10 @@ function HomePage(props) {
     setTasks([...tasks(), newTask]);
   };
 
+  const handleTaskUpdated = (updatedTask) => {
+    setTasks(tasks().map(task => task.id === updatedTask.id ? updatedTask : task));
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     user(null);
@@ -54,7 +58,7 @@ function HomePage(props) {
           </button>
         </div>
         <TaskForm onTaskCreated={handleTaskCreated} />
-        <TaskList tasks={tasks()} loading={loading()} fetchTasks={fetchTasks} />
+        <TaskList tasks={tasks} loading={loading()} fetchTasks={fetchTasks} onTaskUpdated={handleTaskUpdated} />
       </div>
       <a href="https://www.zapt.ai" target="_blank" rel="noopener noreferrer" class="text-gray-500 text-sm mt-8 block text-center">
         Made on ZAPT

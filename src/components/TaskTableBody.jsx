@@ -20,6 +20,7 @@ function TaskTableBody(props) {
               task={task}
               handleAllocateTask={props.handleAllocateTask}
               allocatingTaskId={props.allocatingTaskId}
+              onEditTask={props.onEditTask}
             />
           )}
         </For>
