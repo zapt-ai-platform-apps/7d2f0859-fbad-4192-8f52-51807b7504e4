@@ -20,8 +20,7 @@ function SendReport(props) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          filterField: props.filterField(),
-          filterText: props.filterText(),
+          reportContent: props.reportContent,
           recipientEmail: recipientEmail(),
         }),
       });

@@ -1,7 +1,5 @@
 import * as Sentry from "@sentry/node";
-import { authenticateUser, db, resend } from './_apiUtils.js';
-import { tasks } from '../drizzle/schema.js';
-import { ilike, eq } from 'drizzle-orm';
+import { authenticateUser, resend } from './_apiUtils.js';
 
 Sentry.init({
   dsn: process.env.VITE_PUBLIC_SENTRY_DSN,
@@ -22,37 +20,11 @@ export default async function handler(req, res) {
 
   try {
     const user = await authenticateUser(req);
-    const { filterField, filterText, recipientEmail } = req.body;
+    const { reportContent, recipientEmail } = req.body;
 
-    if (!recipientEmail) {
-      return res.status(400).json({ error: 'Recipient email is required' });
+    if (!recipientEmail || !reportContent) {
+      return res.status(400).json({ error: 'Recipient email and report content are required' });
     }
-
-    // Fetch filtered tasks
-    let query = db.select().from(tasks).where(eq(tasks.owner, user.id));
-
-    if (filterText && filterField) {
-      query = query.where(ilike(tasks[filterField], `%${filterText}%`));
-    }
-
-    const taskList = await query;
-
-    if (!taskList.length) {
-      return res.status(400).json({ error: 'No tasks found for the given filter' });
-    }
-
-    // Generate report content
-    const reportContent = taskList.map((task) => {
-      return `
-Reference Number: ${task.referenceNumber}
-Description: ${task.description}
-Project: ${task.project || 'N/A'}
-Due Date: ${task.dueDate || 'N/A'}
-Status: ${task.status || 'N/A'}
-Priority: ${task.priority || 'N/A'}
-Organisation: ${task.organisation || 'N/A'}
-`;
-    }).join('\n');
 
     // Prepare email data
     const emailData = {
