@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TaskTableHeader from './TaskTableHeader';
 import TaskTableBody from './TaskTableBody';
 import EditTaskForm from './EditTaskForm';
@@ -61,7 +61,7 @@ function TaskTable(props) {
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="w-full overflow-x-auto">
       {editingTask ? (
         <EditTaskForm
           task={editingTask}
@@ -70,7 +70,7 @@ function TaskTable(props) {
           onCancel={handleCancelEdit}
         />
       ) : (
-        <table className="min-w-full bg-white rounded-lg shadow-md">
+        <table className="w-full bg-white rounded-lg shadow-md">
           <TaskTableHeader handleSort={props.handleSort} />
           <TaskTableBody
             loading={props.loading}
