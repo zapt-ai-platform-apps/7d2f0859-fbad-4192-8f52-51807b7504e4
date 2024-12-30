@@ -15,7 +15,7 @@ function TaskDatePriorityFields(props) {
           onChange={(e) =>
             setFormData({ ...formData, dueDate: e.target.value })
           }
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
+          className="w-full p-3 border border-gray-dark rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border"
         />
       </div>
       <div>
@@ -27,7 +27,7 @@ function TaskDatePriorityFields(props) {
           onChange={(e) =>
             setFormData({ ...formData, priority: e.target.value })
           }
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border cursor-pointer"
+          className="w-full p-3 border border-gray-dark rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border cursor-pointer"
         >
           <option value="" disabled>
             Select Priority

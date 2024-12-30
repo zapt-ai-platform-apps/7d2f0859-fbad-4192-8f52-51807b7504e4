@@ -5,6 +5,7 @@ import App from './App';
 import './index.css';
 import * as Sentry from '@sentry/browser';
 
+// Initialize Sentry
 Sentry.init({
   dsn: import.meta.env.VITE_PUBLIC_SENTRY_DSN,
   environment: import.meta.env.VITE_PUBLIC_APP_ENV,

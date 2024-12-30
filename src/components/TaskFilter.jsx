@@ -8,12 +8,12 @@ function TaskFilter(props) {
         placeholder="Filter tasks"
         value={props.filterText}
         onChange={(e) => props.setFilterText(e.target.value)}
-        className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
+        className="flex-1 p-3 border border-gray-dark rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border"
       />
       <select
         value={props.filterField}
         onChange={(e) => props.setFilterField(e.target.value)}
-        className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border cursor-pointer w-full md:w-auto"
+        className="p-3 border border-gray-dark rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border cursor-pointer w-full md:w-auto"
       >
         <option value="referenceNumber">Reference Number</option>
         <option value="description">Description</option>
@@ -25,7 +25,7 @@ function TaskFilter(props) {
       </select>
       <button
         onClick={() => props.setFilterText('')}
-        className="bg-gray-200 p-3 rounded-lg hover:bg-gray-300 transition duration-300 ease-in-out cursor-pointer w-full md:w-auto"
+        className="bg-gray-300 text-gray-800 p-3 rounded-lg hover:bg-gray-400 transition duration-300 ease-in-out cursor-pointer w-full md:w-auto"
       >
         Clear
       </button>

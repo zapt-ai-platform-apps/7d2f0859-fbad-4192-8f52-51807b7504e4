@@ -14,7 +14,7 @@ function TaskStatusOrganisationFields(props) {
           onChange={(e) =>
             setFormData({ ...formData, status: e.target.value })
           }
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border cursor-pointer"
+          className="w-full p-3 border border-gray-dark rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border cursor-pointer"
         >
           <option value="Open">Open</option>
           <option value="Complete">Complete</option>
@@ -32,7 +32,7 @@ function TaskStatusOrganisationFields(props) {
           onChange={(e) =>
             setFormData({ ...formData, organisation: e.target.value })
           }
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
+          className="w-full p-3 border border-gray-dark rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border"
         />
       </div>
     </div>

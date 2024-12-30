@@ -15,7 +15,7 @@ function TaskForm(props) {
       <TaskFormFields formData={formData} setFormData={setFormData} />
       <button
         type="submit"
-        className={`w-full px-6 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`w-full px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
         disabled={loading}
       >
         {loading ? 'Creating Task...' : 'Create Task'}

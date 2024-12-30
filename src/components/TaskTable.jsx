@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { supabase } from '../supabaseClient';
 import TaskTableHeader from './TaskTableHeader';
 import TaskTableBody from './TaskTableBody';
 import EditTaskForm from './EditTaskForm';

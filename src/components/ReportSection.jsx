@@ -28,14 +28,14 @@ function ReportSection(props) {
       <div className="flex items-center mb-4 space-x-4">
         <button
           onClick={handleGenerateReport}
-          className="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out cursor-pointer"
+          className="bg-secondary text-white p-3 rounded-lg hover:bg-secondary-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
         >
           Generate Report
         </button>
         {showReportEditor && (
           <button
             onClick={() => setShowReportEditor(false)}
-            className="bg-red-500 text-white p-3 rounded-lg hover:bg-red-600 transition duration-300 ease-in-out cursor-pointer"
+            className="bg-danger text-white p-3 rounded-lg hover:bg-danger-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
           >
             Close Editor
           </button>

@@ -14,7 +14,7 @@ function EditTaskForm(props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 mb-8">
-      <h2 className="text-2xl font-bold mb-4 text-purple-600">Edit Task</h2>
+      <h2 className="text-2xl font-bold mb-4 text-primary">Edit Task</h2>
       <TaskFormFields formData={formData} setFormData={setFormData} />
       <EditTaskFormButtons
         loading={loading}

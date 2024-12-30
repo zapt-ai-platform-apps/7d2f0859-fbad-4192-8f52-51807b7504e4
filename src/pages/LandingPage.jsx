@@ -28,12 +28,12 @@ function LandingPage() {
   return (
     <>
       {user && <Navigate to="/home" />}
-      <div className="min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 flex flex-col">
+      <div className="min-h-screen bg-gray-light flex flex-col">
         <header className="bg-white shadow">
           <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-purple-600">List App</h1>
+            <h1 className="text-2xl font-bold text-primary">List App</h1>
             <nav>
-              <Link to="/login" className="text-purple-600 hover:text-purple-800 font-semibold transition duration-300 ease-in-out cursor-pointer">
+              <Link to="/login" className="text-primary hover:text-primary-dark font-semibold transition duration-300 ease-in-out cursor-pointer">
                 Sign In
               </Link>
             </nav>
@@ -41,13 +41,13 @@ function LandingPage() {
         </header>
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center px-4">
-            <h2 className="text-5xl font-bold mb-6 text-purple-600">Manage Your Tasks Efficiently</h2>
-            <p className="text-xl text-gray-700 mb-8">
+            <h2 className="text-5xl font-bold mb-6 text-primary">Manage Your Tasks Efficiently</h2>
+            <p className="text-xl text-gray-dark mb-8">
               List App helps you keep track of your tasks and actions,
               allocate tasks to others, and generate insightful reports.
             </p>
             <Link to="/login">
-              <button className="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 px-8 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer">
+              <button className="bg-primary hover:bg-primary-dark text-white font-semibold py-3 px-8 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-primary transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer">
                 Get Started
               </button>
             </Link>
@@ -55,7 +55,7 @@ function LandingPage() {
         </main>
         <footer className="bg-white py-4">
           <div className="text-center">
-            <a href="https://www.zapt.ai" target="_blank" rel="noopener noreferrer" className="text-gray-500 text-sm">
+            <a href="https://www.zapt.ai" target="_blank" rel="noopener noreferrer" className="text-gray-dark text-sm">
               Made on ZAPT
             </a>
           </div>

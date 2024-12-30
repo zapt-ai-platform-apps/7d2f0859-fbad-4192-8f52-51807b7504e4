@@ -13,7 +13,7 @@ function TaskBasicFields(props) {
           onChange={(e) =>
             setFormData({ ...formData, project: e.target.value })
           }
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
+          className="w-full p-3 border border-gray-dark rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border"
         />
       </div>
       <input
@@ -23,7 +23,7 @@ function TaskBasicFields(props) {
         onChange={(e) =>
           setFormData({ ...formData, description: e.target.value })
         }
-        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
+        className="w-full p-3 border border-gray-dark rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border"
         required
       />
     </>
