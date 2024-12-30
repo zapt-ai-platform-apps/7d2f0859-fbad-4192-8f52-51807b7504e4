@@ -1,5 +1,6 @@
 import { authenticateUser, db, withSentry } from './_apiUtils.js';
-import { distinct } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
+import { tasks } from '../drizzle/schema.js';
 
 async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -9,11 +10,15 @@ async function handler(req, res) {
 
   try {
     const user = await authenticateUser(req);
-    
-    const organisations = await db.select({ organisation: db.raw('DISTINCT organisation') })
-                                  .from('tasks')
-                                  .where({ owner: user.id })
-                                  .execute();
+
+    const organisations = await db
+      .select({
+        organisation: tasks.organisation,
+      })
+      .from(tasks)
+      .where(eq(tasks.owner, user.id))
+      .groupBy(tasks.organisation)
+      .execute();
 
     const organisationList = organisations.map(item => item.organisation).filter(o => o);
 

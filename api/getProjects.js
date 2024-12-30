@@ -1,5 +1,6 @@
 import { authenticateUser, db, withSentry } from './_apiUtils.js';
-import { distinct } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
+import { tasks } from '../drizzle/schema.js';
 
 async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -9,11 +10,15 @@ async function handler(req, res) {
 
   try {
     const user = await authenticateUser(req);
-    
-    const projects = await db.select({ project: db.raw('DISTINCT project') })
-                             .from('tasks')
-                             .where({ owner: user.id })
-                             .execute();
+
+    const projects = await db
+      .select({
+        project: tasks.project,
+      })
+      .from(tasks)
+      .where(eq(tasks.owner, user.id))
+      .groupBy(tasks.project)
+      .execute();
 
     const projectList = projects.map(item => item.project).filter(p => p);
 
