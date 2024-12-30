@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
 import { supabase } from './supabaseClient';
+import * as Sentry from '@sentry/browser';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -18,7 +19,7 @@ function App() {
 
     checkUserSignedIn();
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((_, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
       if (session?.user) {
         setUser(session.user);
       } else {
@@ -27,7 +28,7 @@ function App() {
     });
 
     return () => {
-      authListener.unsubscribe();
+      subscription.unsubscribe();
     };
   }, []);
 

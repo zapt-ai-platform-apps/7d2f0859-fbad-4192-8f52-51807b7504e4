@@ -12,7 +12,7 @@ function LandingPage() {
       }
     });
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((_, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
       if (session?.user) {
         setUser(session.user);
       } else {
@@ -21,7 +21,7 @@ function LandingPage() {
     });
 
     return () => {
-      authListener.unsubscribe();
+      subscription.unsubscribe();
     };
   }, []);
 
