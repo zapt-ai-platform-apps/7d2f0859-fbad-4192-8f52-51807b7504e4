@@ -23,11 +23,23 @@ function TaskFilter(props) {
         <option value="organisation">Organisation</option>
         <option value="taskOwner">Task Owner</option>
       </select>
+      <label className="flex items-center space-x-2">
+        <input
+          type="checkbox"
+          checked={props.showOverdue}
+          onChange={(e) => props.setShowOverdue(e.target.checked)}
+          className="form-checkbox h-4 w-4 text-primary"
+        />
+        <span className="text-sm text-muted">Show Overdue</span>
+      </label>
       <button
-        onClick={() => props.setFilterText('')}
+        onClick={() => {
+          props.setFilterText('');
+          props.setShowOverdue(false);
+        }}
         className="bg-muted hover:bg-muted-dark text-white p-3 rounded-lg transition duration-300 ease-in-out cursor-pointer w-full md:w-auto"
       >
-        Clear
+        Clear Filters
       </button>
     </div>
   );

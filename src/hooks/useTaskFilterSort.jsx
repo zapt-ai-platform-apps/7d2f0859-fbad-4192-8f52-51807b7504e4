@@ -6,13 +6,15 @@ function useTaskFilterSort(tasks) {
   const [filterField, setFilterField] = useState('description');
   const [sortField, setSortField] = useState('dueDate');
   const [sortDirection, setSortDirection] = useState('asc');
+  const [showOverdue, setShowOverdue] = useState(false);
 
   const filteredTasks = useFilteredTasks(
     tasks,
     filterText,
     filterField,
     sortField,
-    sortDirection
+    sortDirection,
+    showOverdue
   );
 
   const handleSort = (field) => {
@@ -29,6 +31,8 @@ function useTaskFilterSort(tasks) {
     setFilterText,
     filterField,
     setFilterField,
+    showOverdue,
+    setShowOverdue,
     sortField,
     setSortField,
     sortDirection,

@@ -10,6 +10,8 @@ function TaskList(props) {
     setFilterText,
     filterField,
     setFilterField,
+    showOverdue,
+    setShowOverdue,
     filteredTasks,
     handleSort,
   } = useTaskFilterSort(props.tasks);
@@ -24,6 +26,8 @@ function TaskList(props) {
         setFilterText={setFilterText}
         filterField={filterField}
         setFilterField={setFilterField}
+        showOverdue={showOverdue}
+        setShowOverdue={setShowOverdue}
       />
       <ReportSection
         tasks={filteredTasks}
