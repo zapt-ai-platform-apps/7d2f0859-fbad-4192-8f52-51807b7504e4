@@ -39,32 +39,28 @@ export default async function handler(req, res) {
     const emailData = {
       from: 'no-reply@zapt.ai',
       to: recipientEmail,
-      subject: `Task Assignment: ${task.description}`,
-      text: `You have been assigned a new task:
+      subject: `Task Details: ${task.description}`,
+      text: `Here are the details of the task:
 
 Reference Number: ${task.referenceNumber}
 Description: ${task.description}
 Project: ${task.project || 'N/A'}
-Due Date: ${task.dueDate || 'N/A'}
+Due Date: ${task.dueDate ? task.dueDate.toISOString().split('T')[0] : 'N/A'}
 Status: ${task.status || 'N/A'}
 Priority: ${task.priority || 'N/A'}
 Organisation: ${task.organisation || 'N/A'}
+Task Owner: ${task.taskOwner || 'N/A'}
 
-Please log in to view and manage the task.`,
+Please contact the task owner for more details.`,
     };
 
     // Send email
     await resend.emails.send(emailData);
 
-    // Update task with allocatedTo
-    await db.update(tasks)
-      .set({ allocatedTo: recipientEmail })
-      .where(eq(tasks.id, taskId));
-
-    res.status(200).json({ message: 'Task allocated successfully' });
+    res.status(200).json({ message: 'Task emailed successfully' });
   } catch (error) {
-    console.error('Error allocating task:', error);
+    console.error('Error emailing task:', error);
     Sentry.captureException(error);
-    res.status(500).json({ error: 'Error allocating task' });
+    res.status(500).json({ error: 'Error emailing task' });
   }
 }

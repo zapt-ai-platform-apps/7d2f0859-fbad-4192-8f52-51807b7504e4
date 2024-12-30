@@ -48,9 +48,9 @@ function TaskTableHeader(props) {
         </th>
         <th
           className="px-4 py-2 cursor-pointer"
-          onClick={() => props.handleSort('allocatedTo')}
+          onClick={() => props.handleSort('taskOwner')}
         >
-          Allocated To
+          Task Owner
         </th>
         <th className="px-4 py-2">Actions</th>
       </tr>

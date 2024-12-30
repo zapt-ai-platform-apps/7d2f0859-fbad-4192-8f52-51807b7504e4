@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
 import TaskFormFields from './TaskFormFields';
+import { updateTask, deleteTask } from '../api/taskApi';
 
 function EditTaskForm(props) {
   const [formData, setFormData] = useState({ ...props.task });
@@ -17,22 +18,25 @@ function EditTaskForm(props) {
 
     const { data: { session } } = await supabase.auth.getSession();
     try {
-      const response = await fetch('/api/updateTask', {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${session.access_token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(adjustedFormData)
-      });
-      if (response.ok) {
-        const updatedTask = await response.json();
-        props.onTaskUpdated(updatedTask);
-      } else {
-        console.error('Error updating task:', response.statusText);
-      }
+      const updatedTask = await updateTask(session.access_token, adjustedFormData);
+      props.onTaskUpdated(updatedTask);
     } catch (error) {
       console.error('Error updating task:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm('Are you sure you want to delete this task?')) return;
+
+    setLoading(true);
+    const { data: { session } } = await supabase.auth.getSession();
+    try {
+      await deleteTask(session.access_token, props.task.id);
+      props.onTaskDeleted(props.task.id);
+    } catch (error) {
+      console.error('Error deleting task:', error);
     } finally {
       setLoading(false);
     }
@@ -56,6 +60,13 @@ function EditTaskForm(props) {
           onClick={props.onCancel}
         >
           Cancel
+        </button>
+        <button
+          type="button"
+          className="flex-1 px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+          onClick={handleDelete}
+        >
+          {loading ? 'Deleting...' : 'Delete Task'}
         </button>
       </div>
     </form>

@@ -1,59 +1,14 @@
-import React, { useState } from 'react';
-import { supabase } from '../supabaseClient';
+import React from 'react';
 import TaskFormFields from './TaskFormFields';
+import useTaskForm from '../hooks/useTaskForm';
 
 function TaskForm(props) {
-  const [formData, setFormData] = useState({
-    referenceNumber: '',
-    description: '',
-    project: '',
-    dueDate: '',
-    status: '',
-    priority: 'Normal',
-    organisation: ''
-  });
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const adjustedFormData = { ...formData };
-    if (adjustedFormData.dueDate === '') {
-      adjustedFormData.dueDate = null;
-    }
-
-    const { data: { session } } = await supabase.auth.getSession();
-    try {
-      const response = await fetch('/api/createTask', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${session.access_token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(adjustedFormData)
-      });
-      if (response.ok) {
-        const newTask = await response.json();
-        props.onTaskCreated(newTask);
-        setFormData({
-          referenceNumber: '',
-          description: '',
-          project: '',
-          dueDate: '',
-          status: '',
-          priority: 'Normal',
-          organisation: ''
-        });
-      } else {
-        console.error('Error creating task:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error creating task:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {
+    formData,
+    setFormData,
+    handleSubmit,
+    loading,
+  } = useTaskForm(props.onTaskCreated);
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 mb-8">

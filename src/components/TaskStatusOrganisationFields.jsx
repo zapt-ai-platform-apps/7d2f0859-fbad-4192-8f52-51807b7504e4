@@ -9,15 +9,17 @@ function TaskStatusOrganisationFields(props) {
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Status
         </label>
-        <input
-          type="text"
-          placeholder="Status"
+        <select
           value={formData.status}
           onChange={(e) =>
             setFormData({ ...formData, status: e.target.value })
           }
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
-        />
+          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border cursor-pointer"
+        >
+          <option value="Open">Open</option>
+          <option value="Complete">Complete</option>
+          <option value="Overdue">Overdue</option>
+        </select>
       </div>
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">

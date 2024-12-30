@@ -10,7 +10,8 @@ export const tasks = pgTable('tasks', {
   priority: varchar('priority', { length: 10 }),
   owner: uuid('owner').notNull(),
   organisation: varchar('organisation', { length: 255 }),
-  allocatedTo: varchar('allocated_to', { length: 255 }), // New field
+  allocatedTo: varchar('allocated_to', { length: 255 }),
+  taskOwner: varchar('task_owner', { length: 255 }), // New field
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow()
 });

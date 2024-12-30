@@ -5,19 +5,19 @@ import TaskTableBody from './TaskTableBody';
 import EditTaskForm from './EditTaskForm';
 
 function TaskTable(props) {
-  const [allocatingTaskId, setAllocatingTaskId] = useState(null);
+  const [emailingTaskId, setEmailingTaskId] = useState(null);
   const [editingTask, setEditingTask] = useState(null);
 
-  const handleAllocateTask = async (taskId) => {
+  const handleEmailTask = async (taskId) => {
     const email = prompt('Enter recipient email:');
     if (!email) return;
-    setAllocatingTaskId(taskId);
+    setEmailingTaskId(taskId);
 
     const {
       data: { session },
     } = await supabase.auth.getSession();
     try {
-      const response = await fetch('/api/allocateTask', {
+      const response = await fetch('/api/emailTask', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${session.access_token}`,
@@ -30,17 +30,16 @@ function TaskTable(props) {
       });
 
       if (response.ok) {
-        alert('Task allocated successfully');
-        props.fetchTasks();
+        alert('Task emailed successfully');
       } else {
         const errorData = await response.json();
-        alert('Error allocating task: ' + errorData.error);
+        alert('Error emailing task: ' + errorData.error);
       }
     } catch (error) {
-      console.error('Error allocating task:', error);
-      alert('Error allocating task');
+      console.error('Error emailing task:', error);
+      alert('Error emailing task');
     } finally {
-      setAllocatingTaskId(null);
+      setEmailingTaskId(null);
     }
   };
 
@@ -53,6 +52,11 @@ function TaskTable(props) {
     props.onTaskUpdated(updatedTask);
   };
 
+  const handleDeleteTask = (taskId) => {
+    setEditingTask(null);
+    props.onTaskDeleted(taskId);
+  };
+
   const handleCancelEdit = () => {
     setEditingTask(null);
   };
@@ -63,6 +67,7 @@ function TaskTable(props) {
         <EditTaskForm
           task={editingTask}
           onTaskUpdated={handleUpdateTask}
+          onTaskDeleted={handleDeleteTask}
           onCancel={handleCancelEdit}
         />
       ) : (
@@ -71,8 +76,8 @@ function TaskTable(props) {
           <TaskTableBody
             loading={props.loading}
             tasks={props.tasks}
-            handleAllocateTask={handleAllocateTask}
-            allocatingTaskId={allocatingTaskId}
+            handleEmailTask={handleEmailTask}
+            emailingTaskId={emailingTaskId}
             onEditTask={handleEditTask}
           />
         </table>

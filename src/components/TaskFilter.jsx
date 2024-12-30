@@ -21,7 +21,7 @@ function TaskFilter(props) {
         <option value="status">Status</option>
         <option value="priority">Priority</option>
         <option value="organisation">Organisation</option>
-        <option value="allocatedTo">Allocated To</option>
+        <option value="taskOwner">Task Owner</option>
       </select>
       <button
         onClick={() => props.setFilterText('')}

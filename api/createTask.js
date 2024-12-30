@@ -13,6 +13,12 @@ Sentry.init({
   }
 });
 
+function generateReferenceNumber() {
+  // Generate a 7-digit random number as reference number
+  const randomNumber = Math.floor(1000000 + Math.random() * 9000000);
+  return randomNumber.toString();
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);
@@ -21,12 +27,13 @@ export default async function handler(req, res) {
 
   try {
     const user = await authenticateUser(req);
-    const { referenceNumber, description, project, dueDate, status, priority, organisation } = req.body;
+    const { description, project, dueDate, status, priority, organisation, taskOwner } = req.body;
 
-    if (!referenceNumber || !description) {
-      return res.status(400).json({ error: 'Reference number and description are required' });
+    if (!description) {
+      return res.status(400).json({ error: 'Description is required' });
     }
 
+    const referenceNumber = generateReferenceNumber();
     const dueDateValue = dueDate ? new Date(dueDate) : null;
 
     const result = await db.insert(tasks).values({
@@ -37,7 +44,8 @@ export default async function handler(req, res) {
       status,
       priority,
       owner: user.id,
-      organisation
+      organisation,
+      taskOwner
     }).returning();
 
     res.status(201).json(result[0]);
