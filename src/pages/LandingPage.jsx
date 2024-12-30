@@ -28,7 +28,7 @@ function LandingPage() {
   return (
     <>
       {user && <Navigate to="/home" />}
-      <div className="min-h-screen bg-gray-light flex flex-col">
+      <div className="min-h-screen bg-background text-foreground flex flex-col">
         <header className="bg-white shadow">
           <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 className="text-2xl font-bold text-primary">List App</h1>
@@ -42,7 +42,7 @@ function LandingPage() {
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center px-4">
             <h2 className="text-5xl font-bold mb-6 text-primary">Manage Your Tasks Efficiently</h2>
-            <p className="text-xl text-gray-dark mb-8">
+            <p className="text-xl text-muted mb-8">
               List App helps you keep track of your tasks and actions,
               allocate tasks to others, and generate insightful reports.
             </p>
@@ -55,7 +55,7 @@ function LandingPage() {
         </main>
         <footer className="bg-white py-4">
           <div className="text-center">
-            <a href="https://www.zapt.ai" target="_blank" rel="noopener noreferrer" className="text-gray-dark text-sm">
+            <a href="https://www.zapt.ai" target="_blank" rel="noopener noreferrer" className="text-muted text-sm hover:underline cursor-pointer">
               Made on ZAPT
             </a>
           </div>

@@ -7,32 +7,47 @@ export default {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: '#7c3aed', // purple-600
-                    dark: '#6b21a8',    // purple-700
-                    light: '#a78bfa',   // purple-300
+                    DEFAULT: '#6366F1', // indigo-500
+                    dark: '#4F46E5',    // indigo-600
+                    light: '#818CF8',   // indigo-300
                 },
                 secondary: {
-                    DEFAULT: '#3b82f6', // blue-500
-                    dark: '#2563eb',    // blue-600
-                    light: '#93c5fd',   // blue-300
+                    DEFAULT: '#10B981', // emerald-500
+                    dark: '#059669',    // emerald-600
+                    light: '#34D399',   // emerald-400
                 },
                 success: {
-                    DEFAULT: '#10b981', // green-500
-                    dark: '#059669',    // green-600
+                    DEFAULT: '#16A34A', // green-600
+                    dark: '#14532D',    // green-700
                 },
                 danger: {
-                    DEFAULT: '#ef4444', // red-500
-                    dark: '#dc2626',    // red-600
+                    DEFAULT: '#EF4444', // red-500
+                    dark: '#DC2626',    // red-600
                 },
                 warning: {
-                    DEFAULT: '#f59e0b', // yellow-500
-                    dark: '#d97706',    // yellow-600
+                    DEFAULT: '#F59E0B', // amber-500
+                    dark: '#D97706',    // amber-600
                 },
-                gray: {
-                    light: '#f3f4f6',   // gray-100
-                    DEFAULT: '#e5e7eb', // gray-200
-                    dark: '#d1d5db',    // gray-300
+                accent: {
+                    DEFAULT: '#F472B6', // pink-400
+                    dark: '#DB2777',    // pink-600
+                    light: '#F9A8D4',   // pink-300
                 },
+                muted: {
+                    DEFAULT: '#6B7280', // gray-500
+                    dark: '#4B5563',    // gray-700
+                    light: '#D1D5DB',   // gray-300
+                },
+                background: {
+                    DEFAULT: '#F9FAFB', // gray-50
+                    dark: '#F3F4F6',    // gray-100
+                },
+                foreground: {
+                    DEFAULT: '#111827', // gray-900
+                }
+            },
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
             },
         },
     },

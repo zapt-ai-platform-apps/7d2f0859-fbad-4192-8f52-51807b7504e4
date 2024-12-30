@@ -47,11 +47,11 @@ function SendReport(props) {
         placeholder="Recipient Email"
         value={recipientEmail}
         onChange={(e) => setRecipientEmail(e.target.value)}
-        className="flex-1 p-3 border border-gray-dark rounded-l-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border"
+        className="flex-1 p-3 border border-muted rounded-l-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border"
       />
       <button
         onClick={handleSendReport}
-        className={`bg-secondary text-white p-3 rounded-r-lg hover:bg-secondary-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${sendingReport ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`bg-secondary text-white p-3 rounded-r-lg hover:bg-secondary-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed`}
         disabled={sendingReport}
       >
         {sendingReport ? 'Sending...' : 'Send Report'}

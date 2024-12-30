@@ -4,5 +4,5 @@
 
 /* Add any global styles below */
 body {
-  @apply bg-gray-light;
+  @apply bg-background text-foreground;
 }
