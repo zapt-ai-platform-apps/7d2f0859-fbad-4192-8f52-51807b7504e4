@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import ReportEditorContent from './ReportEditorContent';
+import ReportEditorControls from './ReportEditorControls';
 
 function ReportEditor(props) {
   const [reportContent, setReportContent] = useState(props.initialContent || '');
@@ -10,7 +12,23 @@ function ReportEditor(props) {
 
   const handlePrint = () => {
     const printWindow = window.open('', '_blank');
-    printWindow.document.write(reportContent);
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Task Report</title>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            tr:hover { background-color: #f9f9f9; }
+          </style>
+        </head>
+        <body>
+          ${reportContent}
+        </body>
+      </html>
+    `);
     printWindow.document.close();
     printWindow.focus();
     printWindow.print();
@@ -31,32 +49,15 @@ function ReportEditor(props) {
           {editMode ? 'Preview' : 'Edit'}
         </button>
       </div>
-      {editMode ? (
-        <textarea
-          value={reportContent}
-          onChange={(e) => setReportContent(e.target.value)}
-          className="w-full h-96 p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border resize-none"
-        />
-      ) : (
-        <div
-          className="w-full p-3 border border-muted rounded-lg box-border"
-          dangerouslySetInnerHTML={{ __html: reportContent }}
-        />
-      )}
-      <div className="flex space-x-4 mt-2">
-        <button
-          onClick={handleSave}
-          className="px-6 py-3 bg-secondary text-white rounded-lg hover:bg-secondary-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-        >
-          Save Report
-        </button>
-        <button
-          onClick={handlePrint}
-          className="px-6 py-3 bg-muted text-white rounded-lg hover:bg-muted-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-        >
-          Print Report
-        </button>
-      </div>
+      <ReportEditorContent
+        reportContent={reportContent}
+        setReportContent={setReportContent}
+        editMode={editMode}
+      />
+      <ReportEditorControls
+        handleSave={handleSave}
+        handlePrint={handlePrint}
+      />
     </div>
   );
 }

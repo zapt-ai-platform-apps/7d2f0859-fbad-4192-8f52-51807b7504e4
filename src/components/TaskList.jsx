@@ -19,7 +19,6 @@ function TaskList(props) {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4 text-purple-600">Tasks</h2>
       <TaskFilter
         filterText={filterText}
         setFilterText={setFilterText}
