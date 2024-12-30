@@ -19,14 +19,14 @@ function TaskTableRow(props) {
       <td className="border px-4 py-2">{task.organisation}</td>
       <td className="border px-4 py-2 flex space-x-2">
         <button
-          className={`bg-secondary text-white px-2 py-1 rounded hover:bg-secondary-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed`}
+          className={`flex-1 bg-secondary text-white px-2 py-1 rounded hover:bg-secondary-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed`}
           onClick={() => handleEmailTask(task.id)}
           disabled={emailingTaskId === task.id}
         >
-          {emailingTaskId === task.id ? 'Emailing...' : 'Email To'}
+          {emailingTaskId === task.id ? 'Emailing...' : 'Email'}
         </button>
         <button
-          className="bg-primary text-white px-2 py-1 rounded hover:bg-primary-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+          className={`flex-1 bg-primary text-white px-2 py-1 rounded hover:bg-primary-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer`}
           onClick={() => onEditTask(task)}
         >
           Edit
