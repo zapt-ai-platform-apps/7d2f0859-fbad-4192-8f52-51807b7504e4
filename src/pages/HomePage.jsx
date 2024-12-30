@@ -1,50 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import TaskList from '../components/TaskList';
 import TaskForm from '../components/TaskForm';
 import { supabase } from '../supabaseClient';
+import useTasks from '../hooks/useTasks';
 
 function HomePage(props) {
-  const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(false);
   const user = props.user;
-
-  const fetchTasks = async () => {
-    setLoading(true);
-    const { data: { session } } = await supabase.auth.getSession();
-    try {
-      const response = await fetch('/api/getTasks', {
-        headers: {
-          'Authorization': `Bearer ${session.access_token}`
-        }
-      });
-      if (response.ok) {
-        const fetchedTasks = await response.json();
-        setTasks(fetchedTasks);
-      } else {
-        console.error('Error fetching tasks:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error fetching tasks:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  const handleTaskCreated = (newTask) => {
-    setTasks([...tasks, newTask]);
-  };
-
-  const handleTaskUpdated = (updatedTask) => {
-    setTasks(tasks.map(task => task.id === updatedTask.id ? updatedTask : task));
-  };
+  const { tasks, loading, fetchTasks, handleTaskCreated, handleTaskUpdated, handleTaskDeleted } = useTasks();
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-    props.setUser(null); // Ensure setUser is passed as a prop
+    props.setUser(null);
   };
 
   return (
@@ -60,7 +26,13 @@ function HomePage(props) {
           </button>
         </div>
         <TaskForm onTaskCreated={handleTaskCreated} />
-        <TaskList tasks={tasks} loading={loading} fetchTasks={fetchTasks} onTaskUpdated={handleTaskUpdated} />
+        <TaskList
+          tasks={tasks}
+          loading={loading}
+          fetchTasks={fetchTasks}
+          onTaskUpdated={handleTaskUpdated}
+          onTaskDeleted={handleTaskDeleted}
+        />
       </div>
       <a href="https://www.zapt.ai" target="_blank" rel="noopener noreferrer" className="text-gray-500 text-sm mt-8 block text-center">
         Made on ZAPT

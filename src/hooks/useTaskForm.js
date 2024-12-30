@@ -60,10 +60,13 @@ function useTaskForm(onTaskCreated) {
           taskOwner: '',
         });
       } else {
-        console.error('Error creating task:', response.statusText);
+        const errorData = await response.json();
+        console.error('Error creating task:', errorData.error);
+        alert('Error creating task: ' + errorData.error);
       }
     } catch (error) {
       console.error('Error creating task:', error);
+      alert('Error creating task: ' + error.message);
     } finally {
       setLoading(false);
     }

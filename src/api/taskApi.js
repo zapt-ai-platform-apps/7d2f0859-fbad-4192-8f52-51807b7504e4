@@ -12,7 +12,8 @@ export async function updateTask(accessToken, formData) {
     if (response.ok) {
       return await response.json();
     } else {
-      throw new Error('Error updating task: ' + response.statusText);
+      const errorData = await response.json();
+      throw new Error('Error updating task: ' + errorData.error);
     }
   } catch (error) {
     throw error;
@@ -33,7 +34,8 @@ export async function deleteTask(accessToken, taskId) {
     if (response.ok) {
       return await response.json();
     } else {
-      throw new Error('Error deleting task: ' + response.statusText);
+      const errorData = await response.json();
+      throw new Error('Error deleting task: ' + errorData.error);
     }
   } catch (error) {
     throw error;

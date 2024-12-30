@@ -40,6 +40,7 @@ function TaskList(props) {
           handleSort={handleSort}
           fetchTasks={props.fetchTasks}
           onTaskUpdated={props.onTaskUpdated}
+          onTaskDeleted={props.onTaskDeleted}
         />
       )}
     </div>

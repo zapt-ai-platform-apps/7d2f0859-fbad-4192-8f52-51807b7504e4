@@ -1,7 +1,7 @@
 import * as Sentry from "@sentry/node";
 import { authenticateUser, db } from './_apiUtils.js';
 import { tasks } from '../drizzle/schema.js';
-import { eq } from 'drizzle-orm';
+import { eq, and } from 'drizzle-orm';
 
 Sentry.init({
   dsn: process.env.VITE_PUBLIC_SENTRY_DSN,
@@ -29,7 +29,12 @@ export default async function handler(req, res) {
     }
 
     // Ensure the task belongs to the user
-    const [existingTask] = await db.select().from(tasks).where(eq(tasks.id, id), eq(tasks.owner, user.id));
+    const [existingTask] = await db.select().from(tasks).where(
+      and(
+        eq(tasks.id, id),
+        eq(tasks.owner, user.id)
+      )
+    );
 
     if (!existingTask) {
       return res.status(404).json({ error: 'Task not found' });
