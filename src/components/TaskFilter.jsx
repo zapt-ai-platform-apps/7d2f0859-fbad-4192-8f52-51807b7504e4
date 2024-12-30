@@ -2,18 +2,18 @@ import React from 'react';
 
 function TaskFilter(props) {
   return (
-    <div className="flex mb-4">
+    <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 mb-4">
       <input
         type="text"
         placeholder="Filter tasks"
         value={props.filterText}
         onChange={(e) => props.setFilterText(e.target.value)}
-        className="flex-1 p-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
+        className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
       />
       <select
         value={props.filterField}
         onChange={(e) => props.setFilterField(e.target.value)}
-        className="p-3 border-t border-b border-gray-300 focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border cursor-pointer"
+        className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border cursor-pointer w-full md:w-auto"
       >
         <option value="referenceNumber">Reference Number</option>
         <option value="description">Description</option>
@@ -25,7 +25,7 @@ function TaskFilter(props) {
       </select>
       <button
         onClick={() => props.setFilterText('')}
-        className="bg-gray-200 p-3 rounded-r-lg hover:bg-gray-300 transition duration-300 ease-in-out cursor-pointer"
+        className="bg-gray-200 p-3 rounded-lg hover:bg-gray-300 transition duration-300 ease-in-out cursor-pointer w-full md:w-auto"
       >
         Clear
       </button>
