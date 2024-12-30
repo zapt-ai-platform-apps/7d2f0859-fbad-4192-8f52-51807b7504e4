@@ -1,6 +1,6 @@
 import { tasks } from '../drizzle/schema.js';
 import { authenticateUser, db, resend, withSentry } from './_apiUtils.js';
-import { eq } from 'drizzle-orm';
+import { eq, and } from 'drizzle-orm';
 
 async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -16,7 +16,12 @@ async function handler(req, res) {
   }
 
   // Fetch task
-  const [task] = await db.select().from(tasks).where(eq(tasks.id, taskId), eq(tasks.owner, user.id));
+  const [task] = await db.select().from(tasks).where(
+    and(
+      eq(tasks.id, taskId),
+      eq(tasks.owner, user.id)
+    )
+  );
 
   if (!task) {
     return res.status(404).json({ error: 'Task not found' });

@@ -42,15 +42,15 @@ function TaskTableHeader(props) {
         </th>
         <th
           className="px-4 py-2 text-left text-muted uppercase tracking-wider cursor-pointer"
-          onClick={() => props.handleSort('organisation')}
-        >
-          Organisation
-        </th>
-        <th
-          className="px-4 py-2 text-left text-muted uppercase tracking-wider cursor-pointer"
           onClick={() => props.handleSort('taskOwner')}
         >
           Task Owner
+        </th>
+        <th
+          className="px-4 py-2 text-left text-muted uppercase tracking-wider cursor-pointer"
+          onClick={() => props.handleSort('organisation')}
+        >
+          Organisation
         </th>
         <th className="px-4 py-2 text-left text-muted uppercase tracking-wider">
           Actions

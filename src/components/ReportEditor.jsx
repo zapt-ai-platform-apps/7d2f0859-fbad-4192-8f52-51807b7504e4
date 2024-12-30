@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 function ReportEditor(props) {
   const [reportContent, setReportContent] = useState(props.initialContent || '');
-  const reportRef = useRef();
+  const [editMode, setEditMode] = useState(true);
 
   const handleSave = () => {
     props.onSave(reportContent);
@@ -16,16 +16,33 @@ function ReportEditor(props) {
     printWindow.print();
   };
 
+  const toggleEditMode = () => {
+    setEditMode(!editMode);
+  };
+
   return (
     <div className="mb-4">
-      <h3 className="text-xl font-bold mb-2 text-primary">Report Editor</h3>
-      <div ref={reportRef} className="w-full p-3 border border-muted rounded-lg box-border">
+      <div className="flex justify-between items-center mb-2">
+        <h3 className="text-xl font-bold text-primary">Report Editor</h3>
+        <button
+          onClick={toggleEditMode}
+          className="bg-muted text-white px-4 py-2 rounded hover:bg-muted-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+        >
+          {editMode ? 'Preview' : 'Edit'}
+        </button>
+      </div>
+      {editMode ? (
         <textarea
           value={reportContent}
           onChange={(e) => setReportContent(e.target.value)}
-          className="w-full h-48 p-2 border border-muted rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border resize-none"
+          className="w-full h-96 p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border resize-none"
         />
-      </div>
+      ) : (
+        <div
+          className="w-full p-3 border border-muted rounded-lg box-border"
+          dangerouslySetInnerHTML={{ __html: reportContent }}
+        />
+      )}
       <div className="flex space-x-4 mt-2">
         <button
           onClick={handleSave}

@@ -1,15 +1,20 @@
 import React from 'react';
 import TaskForm from '../components/TaskForm';
 import { supabase } from '../supabaseClient';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useTasks from '../hooks/useTasks';
 
 function CreateTaskPage(props) {
   const { handleTaskCreated } = useTasks();
+  const navigate = useNavigate();
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     props.setUser(null);
+  };
+
+  const handleBack = () => {
+    navigate('/tasks/view');
   };
 
   return (
@@ -18,11 +23,14 @@ function CreateTaskPage(props) {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-primary">Create New Task</h1>
           <div className="flex space-x-4">
-            <Link to="/tasks/view" className="text-secondary hover:underline">
-              View Tasks
-            </Link>
             <button
-              className="bg-danger hover:bg-danger-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-danger transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-secondary hover:bg-secondary-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-secondary transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+              onClick={handleBack}
+            >
+              Back
+            </button>
+            <button
+              className="bg-danger hover:bg-danger-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-danger transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
               onClick={handleSignOut}
             >
               Sign Out

@@ -7,13 +7,18 @@ function generateReportContent(tasks) {
       <td>${task.dueDate ? new Date(task.dueDate).toLocaleDateString('en-GB') : 'N/A'}</td>
       <td>${task.status || 'N/A'}</td>
       <td>${task.priority || 'N/A'}</td>
-      <td>${task.organisation || 'N/A'}</td>
       <td>${task.taskOwner || 'Unassigned'}</td>
+      <td>${task.organisation || 'N/A'}</td>
     </tr>
   `).join('');
 
   return `
-    <table border="1" cellpadding="5" cellspacing="0">
+    <style>
+      table { width: 100%; border-collapse: collapse; }
+      th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+      th { background-color: #f2f2f2; }
+    </style>
+    <table>
       <thead>
         <tr>
           <th>Ref No.</th>
@@ -22,8 +27,8 @@ function generateReportContent(tasks) {
           <th>Due Date</th>
           <th>Status</th>
           <th>Priority</th>
-          <th>Organisation</th>
           <th>Task Owner</th>
+          <th>Organisation</th>
         </tr>
       </thead>
       <tbody>

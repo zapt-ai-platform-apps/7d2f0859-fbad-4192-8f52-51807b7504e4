@@ -10,8 +10,8 @@ function TaskFormFields(props) {
       <TaskBasicFields formData={formData} setFormData={setFormData} />
       <TaskAdditionalFields formData={formData} setFormData={setFormData} />
       <input
-        type="email"
-        placeholder="Task Owner Email"
+        type="text"
+        placeholder="Task Owner Name"
         value={formData.taskOwner}
         onChange={(e) =>
           setFormData({ ...formData, taskOwner: e.target.value })
