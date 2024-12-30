@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import ReportEditorContent from './ReportEditorContent';
 import ReportEditorControls from './ReportEditorControls';
 
-function ReportEditor(props) {
-  const [reportContent, setReportContent] = useState(props.initialContent || '');
-  const [editMode, setEditMode] = useState(true);
-
+function ReportEditor({ reportContent, onSave, saving }) {
   const handleSave = () => {
-    props.onSave(reportContent);
+    onSave(reportContent);
   };
 
   const handlePrint = () => {
@@ -34,30 +31,13 @@ function ReportEditor(props) {
     printWindow.print();
   };
 
-  const toggleEditMode = () => {
-    setEditMode(!editMode);
-  };
-
   return (
     <div className="mb-4">
       <div className="flex justify-between items-center mb-2">
         <h3 className="text-xl font-bold text-primary">Report Editor</h3>
-        <button
-          onClick={toggleEditMode}
-          className="bg-muted text-white px-4 py-2 rounded hover:bg-muted-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-        >
-          {editMode ? 'Preview' : 'Edit'}
-        </button>
       </div>
-      <ReportEditorContent
-        reportContent={reportContent}
-        setReportContent={setReportContent}
-        editMode={editMode}
-      />
-      <ReportEditorControls
-        handleSave={handleSave}
-        handlePrint={handlePrint}
-      />
+      <ReportEditorContent reportContent={reportContent} />
+      <ReportEditorControls handleSave={handleSave} handlePrint={handlePrint} saving={saving} />
     </div>
   );
 }

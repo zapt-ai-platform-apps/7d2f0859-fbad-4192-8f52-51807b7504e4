@@ -11,7 +11,14 @@ export const tasks = pgTable('tasks', {
   owner: uuid('owner').notNull(),
   organisation: varchar('organisation', { length: 255 }),
   allocatedTo: varchar('allocated_to', { length: 255 }),
-  taskOwner: varchar('task_owner', { length: 255 }), // New field
+  taskOwner: varchar('task_owner', { length: 255 }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow()
+});
+
+export const reports = pgTable('reports', {
+  id: serial('id').primaryKey(),
+  userId: uuid('user_id').notNull(),
+  content: text('content').notNull(),
+  createdAt: timestamp('created_at').defaultNow(),
 });
