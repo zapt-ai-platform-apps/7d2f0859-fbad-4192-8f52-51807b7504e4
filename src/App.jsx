@@ -1,13 +1,12 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
-import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
 import CreateTaskPage from './pages/CreateTaskPage';
 import ViewTasksPage from './pages/ViewTasksPage';
 import EditTaskPage from './pages/EditTaskPage';
+import ViewReportsPage from './pages/ViewReportsPage';
 import { supabase } from './supabaseClient';
-import * as Sentry from '@sentry/browser';
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -42,6 +41,7 @@ function App() {
       <Route path="/tasks/view" element={user ? <ViewTasksPage user={user} /> : <Navigate to="/login" />} />
       <Route path="/tasks/create" element={user ? <CreateTaskPage user={user} /> : <Navigate to="/login" />} />
       <Route path="/tasks/edit/:id" element={user ? <EditTaskPage user={user} /> : <Navigate to="/login" />} />
+      <Route path="/reports/view" element={user ? <ViewReportsPage user={user} /> : <Navigate to="/login" />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

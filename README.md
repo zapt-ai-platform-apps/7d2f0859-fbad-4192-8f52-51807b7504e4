@@ -10,4 +10,9 @@ List App is designed to help individuals within organizations, particularly SMEs
 4. [Email Task](docs/journeys/email-task.md) - Send task details via email to anyone.
 5. [Generate and Edit Report](docs/journeys/generate-and-edit-report.md) - Generate, preview, and edit reports before sharing.
 6. [Send Report](docs/journeys/send-report.md) - Share the report with specified recipients via email.
-7. [Delete Task](docs/journeys/delete-task.md) - Remove a task from your task list.
+7. [View Saved Reports](docs/journeys/view-saved-reports.md) - Access and view your previously saved reports.
+8. [Delete Task](docs/journeys/delete-task.md) - Remove a task from your task list.
+
+## External API Services Used
+
+- **Resend**: Used for sending emails when tasks or reports are emailed to recipients.

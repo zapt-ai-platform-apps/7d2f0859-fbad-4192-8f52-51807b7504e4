@@ -18,11 +18,20 @@ function ViewTasksPage(props) {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-primary">View Tasks</h1>
           <div className="flex space-x-4">
-            <Link to="/tasks/create" className="bg-secondary hover:bg-secondary-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-secondary transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer">
+            <Link
+              to="/tasks/create"
+              className="bg-secondary hover:bg-secondary-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-secondary transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+            >
               Create Task
             </Link>
+            <Link
+              to="/reports/view"
+              className="bg-secondary hover:bg-secondary-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-secondary transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+            >
+              View Reports
+            </Link>
             <button
-              className="bg-danger hover:bg-danger-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-danger transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-danger hover:bg-danger-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-danger transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
               onClick={handleSignOut}
             >
               Sign Out
@@ -37,7 +46,12 @@ function ViewTasksPage(props) {
           onTaskDeleted={handleTaskDeleted}
         />
       </div>
-      <a href="https://www.zapt.ai" target="_blank" rel="noopener noreferrer" className="text-muted text-sm mt-8 block text-center hover:underline cursor-pointer">
+      <a
+        href="https://www.zapt.ai"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-muted text-sm mt-8 block text-center hover:underline cursor-pointer"
+      >
         Made on ZAPT
       </a>
     </div>

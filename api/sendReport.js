@@ -18,7 +18,7 @@ async function handler(req, res) {
     from: 'no-reply@zapt.ai',
     to: recipientEmail,
     subject: 'Task Report',
-    text: `Here is the task report:\n\n${reportContent}`,
+    html: `<p>Here is the task report:</p>${reportContent}`,
   };
 
   // Send email
