@@ -31,7 +31,7 @@ function LandingPage() {
       <div className="min-h-screen bg-background text-foreground flex flex-col">
         <header className="bg-white shadow">
           <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-primary">List App</h1>
+            <h1 className="text-2xl font-bold text-primary">Administrate</h1>
             <nav>
               <Link to="/login" className="text-primary hover:text-primary-dark font-semibold transition duration-300 ease-in-out cursor-pointer">
                 Sign In
@@ -43,7 +43,7 @@ function LandingPage() {
           <div className="text-center px-4">
             <h2 className="text-5xl font-bold mb-6 text-primary">Manage Your Tasks Efficiently</h2>
             <p className="text-xl text-muted mb-8">
-              List App helps you keep track of your tasks and actions,
+              Administrate helps you keep track of your tasks and actions,
               allocate tasks to others, and generate insightful reports.
             </p>
             <Link to="/login">

@@ -1,11 +1,12 @@
 import React from 'react';
 import TaskList from '../components/TaskList';
+import TaskForm from '../components/TaskForm';
 import { supabase } from '../supabaseClient';
 import { Link } from 'react-router-dom';
 import useTasks from '../hooks/useTasks';
 
 function ViewTasksPage(props) {
-  const { tasks, loading, fetchTasks, handleTaskUpdated, handleTaskDeleted } = useTasks();
+  const { tasks, loading, fetchTasks, handleTaskCreated, handleTaskUpdated, handleTaskDeleted } = useTasks();
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();

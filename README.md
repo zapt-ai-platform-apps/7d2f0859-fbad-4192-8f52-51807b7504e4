@@ -1,6 +1,6 @@
-# List App
+# Administrate
 
-List App is designed to help individuals within organizations, particularly SMEs, keep track of their own tasks and actions, allocate tasks to others, and generate and share reports.
+Administrate is designed to help individuals within organizations, particularly SMEs, keep track of their own tasks and actions, allocate tasks to others, and generate and share reports.
 
 ## User Journeys
 
