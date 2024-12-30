@@ -1,4 +1,4 @@
-import { Show } from 'solid-js';
+import React from 'react';
 import generateReportContent from '../utils/generateReportContent';
 import ReportEditor from './ReportEditor';
 import SendReport from './SendReport';
@@ -13,7 +13,7 @@ function ReportSection(props) {
   } = props;
 
   const handleGenerateReport = () => {
-    const content = generateReportContent(tasks());
+    const content = generateReportContent(tasks);
     setReportContent(content);
     setShowReportEditor(true);
   };
@@ -25,29 +25,31 @@ function ReportSection(props) {
 
   return (
     <div>
-      <div class="flex items-center mb-4 space-x-4">
+      <div className="flex items-center mb-4 space-x-4">
         <button
           onClick={handleGenerateReport}
-          class="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out cursor-pointer"
+          className="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out cursor-pointer"
         >
           Generate Report
         </button>
-        <Show when={showReportEditor()}>
+        {showReportEditor && (
           <button
             onClick={() => setShowReportEditor(false)}
-            class="bg-red-500 text-white p-3 rounded-lg hover:bg-red-600 transition duration-300 ease-in-out cursor-pointer"
+            className="bg-red-500 text-white p-3 rounded-lg hover:bg-red-600 transition duration-300 ease-in-out cursor-pointer"
           >
             Close Editor
           </button>
-        </Show>
+        )}
       </div>
-      <Show when={showReportEditor()}>
-        <ReportEditor
-          initialContent={reportContent()}
-          onSave={handleSaveReport}
-        />
-        <SendReport reportContent={reportContent()} />
-      </Show>
+      {showReportEditor && (
+        <>
+          <ReportEditor
+            initialContent={reportContent}
+            onSave={handleSaveReport}
+          />
+          <SendReport reportContent={reportContent} />
+        </>
+      )}
     </div>
   );
 }

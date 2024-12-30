@@ -1,3 +1,4 @@
+import React from 'react';
 import TaskDatePriorityFields from './TaskDatePriorityFields';
 import TaskStatusOrganisationFields from './TaskStatusOrganisationFields';
 

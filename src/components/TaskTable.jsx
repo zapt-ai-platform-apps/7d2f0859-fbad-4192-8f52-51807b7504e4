@@ -1,12 +1,12 @@
-import { createSignal, Show } from 'solid-js';
+import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
 import TaskTableHeader from './TaskTableHeader';
 import TaskTableBody from './TaskTableBody';
 import EditTaskForm from './EditTaskForm';
 
 function TaskTable(props) {
-  const [allocatingTaskId, setAllocatingTaskId] = createSignal(null);
-  const [editingTask, setEditingTask] = createSignal(null);
+  const [allocatingTaskId, setAllocatingTaskId] = useState(null);
+  const [editingTask, setEditingTask] = useState(null);
 
   const handleAllocateTask = async (taskId) => {
     const email = prompt('Enter recipient email:');
@@ -58,15 +58,15 @@ function TaskTable(props) {
   };
 
   return (
-    <div class="overflow-x-auto">
-      <Show when={!editingTask()} fallback={
+    <div className="overflow-x-auto">
+      {editingTask ? (
         <EditTaskForm
-          task={editingTask()}
+          task={editingTask}
           onTaskUpdated={handleUpdateTask}
           onCancel={handleCancelEdit}
         />
-      }>
-        <table class="min-w-full bg-white rounded-lg shadow-md">
+      ) : (
+        <table className="min-w-full bg-white rounded-lg shadow-md">
           <TaskTableHeader handleSort={props.handleSort} />
           <TaskTableBody
             loading={props.loading}
@@ -76,7 +76,7 @@ function TaskTable(props) {
             onEditTask={handleEditTask}
           />
         </table>
-      </Show>
+      )}
     </div>
   );
 }

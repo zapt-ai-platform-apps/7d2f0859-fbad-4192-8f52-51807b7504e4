@@ -1,3 +1,4 @@
+import React from 'react';
 import TaskBasicFields from './TaskBasicFields';
 import TaskAdditionalFields from './TaskAdditionalFields';
 

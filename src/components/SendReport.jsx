@@ -1,12 +1,12 @@
-import { createSignal } from 'solid-js';
+import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
 
 function SendReport(props) {
-  const [sendingReport, setSendingReport] = createSignal(false);
-  const [recipientEmail, setRecipientEmail] = createSignal('');
+  const [sendingReport, setSendingReport] = useState(false);
+  const [recipientEmail, setRecipientEmail] = useState('');
 
   const handleSendReport = async () => {
-    if (!recipientEmail()) {
+    if (!recipientEmail) {
       alert('Please enter a recipient email');
       return;
     }
@@ -21,7 +21,7 @@ function SendReport(props) {
         },
         body: JSON.stringify({
           reportContent: props.reportContent,
-          recipientEmail: recipientEmail(),
+          recipientEmail: recipientEmail,
         }),
       });
 
@@ -41,20 +41,20 @@ function SendReport(props) {
   };
 
   return (
-    <div class="flex items-center mb-4">
+    <div className="flex items-center mb-4">
       <input
         type="email"
         placeholder="Recipient Email"
-        value={recipientEmail()}
-        onInput={(e) => setRecipientEmail(e.target.value)}
-        class="flex-1 p-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
+        value={recipientEmail}
+        onChange={(e) => setRecipientEmail(e.target.value)}
+        className="flex-1 p-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
       />
       <button
         onClick={handleSendReport}
-        class={`bg-blue-500 text-white p-3 rounded-r-lg hover:bg-blue-600 transition duration-300 ease-in-out cursor-pointer ${sendingReport() ? 'opacity-50 cursor-not-allowed' : ''}`}
-        disabled={sendingReport()}
+        className={`bg-blue-500 text-white p-3 rounded-r-lg hover:bg-blue-600 transition duration-300 ease-in-out cursor-pointer ${sendingReport ? 'opacity-50 cursor-not-allowed' : ''}`}
+        disabled={sendingReport}
       >
-        {sendingReport() ? 'Sending...' : 'Send Report'}
+        {sendingReport ? 'Sending...' : 'Send Report'}
       </button>
     </div>
   );

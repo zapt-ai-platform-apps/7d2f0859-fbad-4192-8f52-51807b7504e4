@@ -1,12 +1,14 @@
-import { render } from 'solid-js/web';
-import { Router } from '@solidjs/router';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 
 Sentry.init({
   dsn: import.meta.env.VITE_PUBLIC_SENTRY_DSN,
   environment: import.meta.env.VITE_PUBLIC_APP_ENV,
+  integrations: [new Sentry.BrowserTracing()],
   initialScope: {
     tags: {
       type: 'frontend',
@@ -24,8 +26,9 @@ if (!window.location.hostname.includes('vercel.app')) {
   document.head.appendChild(script);
 }
 
-render(() => (
-  <Router>
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <BrowserRouter>
     <App />
-  </Router>
-), document.getElementById('root'));
+  </BrowserRouter>
+);

@@ -1,16 +1,16 @@
-import { createSignal } from 'solid-js';
+import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
 import TaskFormFields from './TaskFormFields';
 
 function EditTaskForm(props) {
-  const [formData, setFormData] = createSignal({ ...props.task });
-  const [loading, setLoading] = createSignal(false);
+  const [formData, setFormData] = useState({ ...props.task });
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const adjustedFormData = { ...formData(), id: props.task.id };
+    const adjustedFormData = { ...formData, id: props.task.id };
     if (adjustedFormData.dueDate === '') {
       adjustedFormData.dueDate = null;
     }
@@ -39,20 +39,20 @@ function EditTaskForm(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit} class="space-y-4 mb-8">
-      <h2 class="text-2xl font-bold mb-4 text-purple-600">Edit Task</h2>
+    <form onSubmit={handleSubmit} className="space-y-4 mb-8">
+      <h2 className="text-2xl font-bold mb-4 text-purple-600">Edit Task</h2>
       <TaskFormFields formData={formData} setFormData={setFormData} />
-      <div class="flex space-x-4">
+      <div className="flex space-x-4">
         <button
           type="submit"
-          class={`flex-1 px-6 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${loading() ? 'opacity-50 cursor-not-allowed' : ''}`}
-          disabled={loading()}
+          className={`flex-1 px-6 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={loading}
         >
-          {loading() ? 'Updating Task...' : 'Update Task'}
+          {loading ? 'Updating Task...' : 'Update Task'}
         </button>
         <button
           type="button"
-          class="flex-1 px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+          className="flex-1 px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
           onClick={props.onCancel}
         >
           Cancel

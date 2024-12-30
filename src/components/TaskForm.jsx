@@ -1,9 +1,9 @@
-import { createSignal } from 'solid-js';
+import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
 import TaskFormFields from './TaskFormFields';
 
 function TaskForm(props) {
-  const [formData, setFormData] = createSignal({
+  const [formData, setFormData] = useState({
     referenceNumber: '',
     description: '',
     project: '',
@@ -12,13 +12,13 @@ function TaskForm(props) {
     priority: 'Normal',
     organisation: ''
   });
-  const [loading, setLoading] = createSignal(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const adjustedFormData = { ...formData() };
+    const adjustedFormData = { ...formData };
     if (adjustedFormData.dueDate === '') {
       adjustedFormData.dueDate = null;
     }
@@ -56,14 +56,14 @@ function TaskForm(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit} class="space-y-4 mb-8">
+    <form onSubmit={handleSubmit} className="space-y-4 mb-8">
       <TaskFormFields formData={formData} setFormData={setFormData} />
       <button
         type="submit"
-        class={`w-full px-6 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${loading() ? 'opacity-50 cursor-not-allowed' : ''}`}
-        disabled={loading()}
+        className={`w-full px-6 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+        disabled={loading}
       >
-        {loading() ? 'Creating Task...' : 'Create Task'}
+        {loading ? 'Creating Task...' : 'Create Task'}
       </button>
     </form>
   );
