@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TaskTableHeader from './TaskTableHeader';
 import TaskTableBody from './TaskTableBody';
 import EditTaskForm from './EditTaskForm';
+import { supabase } from '../supabaseClient';
 
 function TaskTable(props) {
   const [emailingTaskId, setEmailingTaskId] = useState(null);
