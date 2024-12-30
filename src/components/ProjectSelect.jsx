@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import fetchProjects from '../api/fetchProjects';
+import ProjectAdd from './ProjectAdd';
 
 function ProjectSelect({ formData, setFormData }) {
   const [projects, setProjects] = useState([]);
@@ -6,11 +8,11 @@ function ProjectSelect({ formData, setFormData }) {
   const [newProject, setNewProject] = useState('');
 
   useEffect(() => {
-    // Fetch existing projects
-    fetch('/api/getProjects')
-      .then(response => response.json())
-      .then(data => setProjects(data))
-      .catch(error => console.error('Error fetching projects:', error));
+    const fetchData = async () => {
+      const projectsData = await fetchProjects();
+      setProjects(projectsData);
+    };
+    fetchData();
   }, []);
 
   const handleProjectChange = (e) => {
@@ -42,7 +44,7 @@ function ProjectSelect({ formData, setFormData }) {
       {!isAddingProject ? (
         <select
           id="project"
-          value={formData.project}
+          value={formData.project || ''}
           onChange={handleProjectChange}
           className="w-full p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border cursor-pointer"
         >
@@ -55,29 +57,12 @@ function ProjectSelect({ formData, setFormData }) {
           <option value="add_new">+ Add New Project</option>
         </select>
       ) : (
-        <div className="flex space-x-2">
-          <input
-            type="text"
-            value={newProject}
-            onChange={(e) => setNewProject(e.target.value)}
-            placeholder="Enter new project"
-            className="flex-1 p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border"
-          />
-          <button
-            type="button"
-            onClick={handleAddProject}
-            className="bg-secondary hover:bg-secondary-dark text-white px-4 py-3 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-          >
-            Add
-          </button>
-          <button
-            type="button"
-            onClick={() => { setIsAddingProject(false); setNewProject(''); }}
-            className="bg-danger hover:bg-danger-dark text-white px-4 py-3 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-          >
-            Cancel
-          </button>
-        </div>
+        <ProjectAdd
+          newProject={newProject}
+          setNewProject={setNewProject}
+          handleAddProject={handleAddProject}
+          setIsAddingProject={setIsAddingProject}
+        />
       )}
     </div>
   );

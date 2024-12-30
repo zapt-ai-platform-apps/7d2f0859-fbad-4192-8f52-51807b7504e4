@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import useOrganisations from '../hooks/useOrganisations';
+import AddOrganisationForm from './AddOrganisationForm';
 
 function OrganisationSelect({ formData, setFormData }) {
-  const [organisations, setOrganisations] = useState([]);
+  const [organisations, setOrganisations] = useOrganisations();
   const [isAddingOrganisation, setIsAddingOrganisation] = useState(false);
-  const [newOrganisation, setNewOrganisation] = useState('');
-
-  useEffect(() => {
-    // Fetch existing organisations
-    fetch('/api/getOrganisations')
-      .then(response => response.json())
-      .then(data => setOrganisations(data))
-      .catch(error => console.error('Error fetching organisations:', error));
-  }, []);
 
   const handleOrganisationChange = (e) => {
     const value = e.target.value;
@@ -23,14 +16,9 @@ function OrganisationSelect({ formData, setFormData }) {
     }
   };
 
-  const handleAddOrganisation = () => {
-    if (newOrganisation.trim() === '') {
-      alert('Organisation name cannot be empty.');
-      return;
-    }
-    setFormData({ ...formData, organisation: newOrganisation.trim() });
-    setOrganisations([...organisations, newOrganisation.trim()]);
-    setNewOrganisation('');
+  const handleAddOrganisation = (newOrganisation) => {
+    setFormData({ ...formData, organisation: newOrganisation });
+    setOrganisations([...organisations, newOrganisation]);
     setIsAddingOrganisation(false);
   };
 
@@ -55,29 +43,10 @@ function OrganisationSelect({ formData, setFormData }) {
           <option value="add_new">+ Add New Organisation</option>
         </select>
       ) : (
-        <div className="flex space-x-2">
-          <input
-            type="text"
-            value={newOrganisation}
-            onChange={(e) => setNewOrganisation(e.target.value)}
-            placeholder="Enter new organisation"
-            className="flex-1 p-3 border border-muted rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent box-border"
-          />
-          <button
-            type="button"
-            onClick={handleAddOrganisation}
-            className="bg-secondary hover:bg-secondary-dark text-white px-4 py-3 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-          >
-            Add
-          </button>
-          <button
-            type="button"
-            onClick={() => { setIsAddingOrganisation(false); setNewOrganisation(''); }}
-            className="bg-danger hover:bg-danger-dark text-white px-4 py-3 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-          >
-            Cancel
-          </button>
-        </div>
+        <AddOrganisationForm
+          onAdd={handleAddOrganisation}
+          onCancel={() => setIsAddingOrganisation(false)}
+        />
       )}
     </div>
   );
