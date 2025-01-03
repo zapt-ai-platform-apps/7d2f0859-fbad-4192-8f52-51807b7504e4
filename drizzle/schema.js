@@ -22,3 +22,10 @@ export const reports = pgTable('reports', {
   content: text('content').notNull(),
   createdAt: timestamp('created_at').defaultNow(),
 });
+
+export const userSettings = pgTable('user_settings', {
+  id: serial('id').primaryKey(),
+  userId: uuid('user_id').notNull(),
+  logoUrl: text('logo_url'),
+  customHeader: text('custom_header'),
+});

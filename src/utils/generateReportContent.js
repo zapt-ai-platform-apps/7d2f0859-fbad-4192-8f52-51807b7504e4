@@ -1,5 +1,13 @@
-function generateReportContent(tasks) {
-  let tableRows = tasks.map(task => `
+function generateReportContent(tasks, options = {}) {
+  const { logoUrl, customHeader, columnShading } = options;
+  const today = new Date();
+  const reportDate = today.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  });
+
+  let tableRows = tasks.map((task, index) => `
     <tr>
       <td>${task.referenceNumber}</td>
       <td>${task.description}</td>
@@ -13,28 +21,30 @@ function generateReportContent(tasks) {
   `).join('');
 
   return `
-    <style>
-      table { width: 100%; border-collapse: collapse; }
-      th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-      th { background-color: #f2f2f2; }
-    </style>
-    <table>
+    <div style="text-align: center; margin-bottom: 20px;">
+      ${logoUrl ? `<img src="${logoUrl}" alt="Logo" style="max-height: 100px;"/>` : ''}
+      <h1>${customHeader || 'Task Report'}</h1>
+    </div>
+    <table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
       <thead>
         <tr>
-          <th>Ref No.</th>
-          <th>Description</th>
-          <th>Project</th>
-          <th>Due Date</th>
-          <th>Status</th>
-          <th>Priority</th>
-          <th>Task Owner</th>
-          <th>Organisation</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Ref No.</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Description</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Project</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Due Date</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Status</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Priority</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Task Owner</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Organisation</th>
         </tr>
       </thead>
       <tbody>
         ${tableRows}
       </tbody>
     </table>
+    <footer style="margin-top: 20px; font-size: 12px;">
+      <div style="text-align: left;">Report Date: ${reportDate}</div>
+    </footer>
   `;
 }
 

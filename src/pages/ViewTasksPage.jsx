@@ -1,9 +1,10 @@
 import React from 'react';
 import TaskList from '../components/TaskList';
-import TaskForm from '../components/TaskForm';
 import { supabase } from '../supabaseClient';
 import { Link } from 'react-router-dom';
 import useTasks from '../hooks/useTasks';
+import ViewTasksHeader from '../components/ViewTasksHeader';
+import ViewTasksFooter from '../components/ViewTasksFooter';
 
 function ViewTasksPage(props) {
   const { tasks, loading, fetchTasks, handleTaskCreated, handleTaskUpdated, handleTaskDeleted } = useTasks();
@@ -14,47 +15,40 @@ function ViewTasksPage(props) {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-4">
-      <div className="w-full">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold text-primary">View Tasks</h1>
-          <div className="flex space-x-4">
+    <div className="min-h-screen bg-background text-foreground p-4 flex flex-col">
+      <ViewTasksHeader onSignOut={handleSignOut} />
+      <div className="w-full flex-grow">
+        {tasks.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-full">
+            <p className="text-2xl text-muted mb-6">You have no tasks.</p>
             <Link
               to="/tasks/create"
-              className="bg-secondary hover:bg-secondary-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-secondary transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+              className="bg-primary hover:bg-primary-dark text-white font-semibold py-4 px-8 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-primary transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer text-xl"
             >
-              Create Task
+              Create Your First Task
             </Link>
-            <Link
-              to="/reports/view"
-              className="bg-secondary hover:bg-secondary-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-secondary transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-            >
-              View Reports
-            </Link>
-            <button
-              className="bg-danger hover:bg-danger-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-danger transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-              onClick={handleSignOut}
-            >
-              Sign Out
-            </button>
           </div>
-        </div>
-        <TaskList
-          tasks={tasks}
-          loading={loading}
-          fetchTasks={fetchTasks}
-          onTaskUpdated={handleTaskUpdated}
-          onTaskDeleted={handleTaskDeleted}
-        />
+        ) : (
+          <div>
+            <div className="flex justify-end mb-4">
+              <Link
+                to="/tasks/create"
+                className="bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-primary transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+              >
+                Create Task
+              </Link>
+            </div>
+            <TaskList
+              tasks={tasks}
+              loading={loading}
+              fetchTasks={fetchTasks}
+              onTaskUpdated={handleTaskUpdated}
+              onTaskDeleted={handleTaskDeleted}
+            />
+          </div>
+        )}
       </div>
-      <a
-        href="https://www.zapt.ai"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-muted text-sm mt-8 block text-center hover:underline cursor-pointer"
-      >
-        Made on ZAPT
-      </a>
+      <ViewTasksFooter />
     </div>
   );
 }

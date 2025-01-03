@@ -1,34 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReportEditorContent from './ReportEditorContent';
 import ReportEditorControls from './ReportEditorControls';
+import useUserSettings from '../hooks/useUserSettings';
+import printReport from '../utils/printReport';
 
 function ReportEditor({ reportContent, onSave, saving }) {
+  const [columnShading, setColumnShading] = useState(false);
+  const { logoUrl, customHeader, fetchSettings } = useUserSettings();
+
+  useEffect(() => {
+    fetchSettings();
+  }, [fetchSettings]);
+
   const handleSave = () => {
     onSave(reportContent);
   };
 
   const handlePrint = () => {
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(`
-      <html>
-        <head>
-          <title>Task Report</title>
-          <style>
-            body { font-family: Arial, sans-serif; padding: 20px; }
-            table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-            th { background-color: #f2f2f2; }
-            tr:hover { background-color: #f9f9f9; }
-          </style>
-        </head>
-        <body>
-          ${reportContent}
-        </body>
-      </html>
-    `);
-    printWindow.document.close();
-    printWindow.focus();
-    printWindow.print();
+    printReport(reportContent, columnShading);
+  };
+
+  const handleToggleShading = () => {
+    setColumnShading(!columnShading);
   };
 
   return (
@@ -36,8 +29,19 @@ function ReportEditor({ reportContent, onSave, saving }) {
       <div className="flex justify-between items-center mb-2">
         <h3 className="text-xl font-bold text-primary">Report Editor</h3>
       </div>
-      <ReportEditorContent reportContent={reportContent} />
-      <ReportEditorControls handleSave={handleSave} handlePrint={handlePrint} saving={saving} />
+      <ReportEditorContent
+        reportContent={reportContent}
+        logoUrl={logoUrl}
+        customHeader={customHeader}
+        columnShading={columnShading}
+      />
+      <ReportEditorControls
+        handleSave={handleSave}
+        handlePrint={handlePrint}
+        saving={saving}
+        columnShading={columnShading}
+        handleToggleShading={handleToggleShading}
+      />
     </div>
   );
 }
