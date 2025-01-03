@@ -5,22 +5,41 @@ function printReport(reportContent, columnShading) {
       <head>
         <title>Task Report</title>
         <style>
-          body { font-family: Arial, sans-serif; padding: 20px; }
+          @page {
+            size: A4;
+            margin: 20mm;
+          }
+          body { font-family: Arial, sans-serif; padding: 0; margin: 0; }
           table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
           th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
           th { background-color: #f2f2f2; }
           tr:nth-child(even) td { background-color: ${columnShading ? '#f9f9f9' : 'transparent'}; }
-          footer { position: fixed; bottom: 0; left: 0; right: 0; text-align: left; font-size: 12px; }
+          footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+          }
+          .page-number:after {
+            content: counter(page);
+          }
         </style>
       </head>
       <body>
         ${reportContent}
+        <footer>
+          Page <span class="page-number"></span>
+        </footer>
       </body>
     </html>
   `);
   printWindow.document.close();
   printWindow.focus();
-  printWindow.print();
+  setTimeout(() => {
+    printWindow.print();
+    printWindow.close();
+  }, 500);
 }
 
 export default printReport;

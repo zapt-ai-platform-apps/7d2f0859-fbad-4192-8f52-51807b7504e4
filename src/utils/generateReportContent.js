@@ -1,5 +1,5 @@
 function generateReportContent(tasks, options = {}) {
-  const { logoUrl, customHeader, columnShading } = options;
+  const { logoUrl, customHeader } = options;
   const today = new Date();
   const reportDate = today.toLocaleDateString('en-GB', {
     day: '2-digit',
@@ -42,9 +42,6 @@ function generateReportContent(tasks, options = {}) {
         ${tableRows}
       </tbody>
     </table>
-    <footer style="margin-top: 20px; font-size: 12px;">
-      <div style="text-align: left;">Report Date: ${reportDate}</div>
-    </footer>
   `;
 }
 

@@ -15,12 +15,15 @@
     "@supabase/auth-ui-react": "^0.4.7",
     "@zapt/zapt-js": "^1.0.6",
     "date-fns": "^2.30.0",
+    "docx": "^8.4.0",
     "drizzle-orm": "^0.33.0",
+    "jspdf": "^2.5.1",
     "postgres": "^3.4.5",
-    "resend": "^4.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.14.1"
+    "react-router-dom": "^6.14.1",
+    "resend": "^4.0.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
