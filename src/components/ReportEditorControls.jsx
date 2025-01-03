@@ -1,6 +1,6 @@
 import React from 'react';
-import ExportButtons from './ExportButtons';
-import ShadingToggle from './ShadingToggle';
+import ExportButtons from './ReportEditorControls/ExportButtons';
+import ShadingToggle from './ReportEditorControls/ShadingToggle';
 
 function ReportEditorControls({
   handleSave,
