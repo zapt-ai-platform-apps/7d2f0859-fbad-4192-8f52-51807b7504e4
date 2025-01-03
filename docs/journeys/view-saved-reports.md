@@ -8,8 +8,14 @@
 3. For each report, you can see:
    - The creation date and time.
    - The content of the report.
-4. Scroll through the reports to review their contents.
-5. Interact with the report content as needed.
+   - **Share** and **Print** options.
+4. To **share** a report:
+   - Click on the **Share Report** button.
+   - Enter the recipient's email address when prompted.
+   - Click **OK** to send the report via email.
+5. To **print** a report:
+   - Click on the **Print Report** button.
+   - A print dialog will open, allowing you to print the report.
 
 **Note**: Reports are displayed with proper formatting, including tables and styles, as they were when you saved them.
 

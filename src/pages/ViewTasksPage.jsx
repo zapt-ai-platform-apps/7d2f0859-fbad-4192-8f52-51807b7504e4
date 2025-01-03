@@ -29,23 +29,13 @@ function ViewTasksPage(props) {
             </Link>
           </div>
         ) : (
-          <div>
-            <div className="flex justify-end mb-4">
-              <Link
-                to="/tasks/create"
-                className="bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-primary transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-              >
-                Create Task
-              </Link>
-            </div>
-            <TaskList
-              tasks={tasks}
-              loading={loading}
-              fetchTasks={fetchTasks}
-              onTaskUpdated={handleTaskUpdated}
-              onTaskDeleted={handleTaskDeleted}
-            />
-          </div>
+          <TaskList
+            tasks={tasks}
+            loading={loading}
+            fetchTasks={fetchTasks}
+            onTaskUpdated={handleTaskUpdated}
+            onTaskDeleted={handleTaskDeleted}
+          />
         )}
       </div>
       <ViewTasksFooter />
