@@ -1,5 +1,5 @@
 import React from 'react';
-import { exportToPDF, exportToWord, exportToExcel } from '../utils/exportReport';
+import { exportToPDF, exportToWord, exportToExcel } from '../../utils/exportReport';
 
 function ExportButtons({ reportContent, tasks }) {
   const handleExportPDF = () => {
@@ -24,26 +24,26 @@ function ExportButtons({ reportContent, tasks }) {
   };
 
   return (
-    <>
+    <div className="flex space-x-4">
       <button
         onClick={handleExportPDF}
-        className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+        className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
       >
         Export as PDF
       </button>
       <button
         onClick={handleExportWord}
-        className="px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+        className="bg-accent hover:bg-accent-dark text-white px-4 py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
       >
         Export as Word
       </button>
       <button
         onClick={handleExportExcel}
-        className="px-6 py-3 bg-warning text-white rounded-lg hover:bg-warning-dark transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+        className="bg-warning hover:bg-warning-dark text-white px-4 py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
       >
         Export as Excel
       </button>
-    </>
+    </div>
   );
 }
 
