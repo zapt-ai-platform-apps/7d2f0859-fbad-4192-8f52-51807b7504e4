@@ -1,4 +1,3 @@
-```jsx
 import React from 'react';
 
 function getPriorityColor(value) {
@@ -42,4 +41,3 @@ function PrioritySelector({ value, onChange }) {
 }
 
 export default PrioritySelector;
-```

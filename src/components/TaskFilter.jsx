@@ -1,4 +1,3 @@
-```jsx
 import React from 'react';
 
 function TaskFilter(props) {
@@ -57,4 +56,3 @@ function TaskFilter(props) {
 }
 
 export default TaskFilter;
-```

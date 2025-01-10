@@ -1,4 +1,3 @@
-```jsx
 import { useMemo } from 'react';
 
 function useFilteredTasks(tasks, filterText, filterField, sortField, sortDirection, showOverdue, showCompleted) {
@@ -43,4 +42,3 @@ function useFilteredTasks(tasks, filterText, filterField, sortField, sortDirecti
 }
 
 export default useFilteredTasks;
-```

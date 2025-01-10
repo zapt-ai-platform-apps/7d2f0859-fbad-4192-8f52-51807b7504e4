@@ -1,4 +1,3 @@
-```jsx
 import React from 'react';
 import TaskForm from '../components/TaskForm';
 import { supabase } from '../supabaseClient';
@@ -50,4 +49,3 @@ function CreateTaskPage(props) {
 }
 
 export default CreateTaskPage;
-```

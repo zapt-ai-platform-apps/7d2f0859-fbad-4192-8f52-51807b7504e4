@@ -1,4 +1,3 @@
-```jsx
 function generateReportContent(tasks, options = {}) {
   const { logoUrl, customHeader } = options;
   const today = new Date();
@@ -47,4 +46,3 @@ function generateReportContent(tasks, options = {}) {
 }
 
 export default generateReportContent;
-```

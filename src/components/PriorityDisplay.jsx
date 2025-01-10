@@ -1,4 +1,3 @@
-```jsx
 import React from 'react';
 
 function getPriorityColor(value) {
@@ -26,4 +25,3 @@ function PriorityDisplay({ value }) {
 }
 
 export default PriorityDisplay;
-```

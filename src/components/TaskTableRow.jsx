@@ -1,4 +1,3 @@
-```jsx
 import React from 'react';
 import { format } from 'date-fns';
 import { supabase } from '../supabaseClient';
@@ -41,4 +40,3 @@ function TaskTableRow(props) {
 }
 
 export default TaskTableRow;
-```

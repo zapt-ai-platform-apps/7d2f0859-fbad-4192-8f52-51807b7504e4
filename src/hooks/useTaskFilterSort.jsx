@@ -1,4 +1,3 @@
-```jsx
 import { useState } from 'react';
 import useFilteredTasks from './useFilteredTasks';
 
@@ -48,4 +47,3 @@ function useTaskFilterSort(tasks) {
 }
 
 export default useTaskFilterSort;
-```
