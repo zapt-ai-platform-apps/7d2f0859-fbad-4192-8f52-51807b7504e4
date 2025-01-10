@@ -1,3 +1,4 @@
+```jsx
 import React from 'react';
 
 function TaskFilter(props) {
@@ -32,10 +33,20 @@ function TaskFilter(props) {
         />
         <span className="text-sm text-muted">Show Overdue</span>
       </label>
+      <label className="flex items-center space-x-2">
+        <input
+          type="checkbox"
+          checked={props.showCompleted}
+          onChange={(e) => props.setShowCompleted(e.target.checked)}
+          className="form-checkbox h-4 w-4 text-primary"
+        />
+        <span className="text-sm text-muted">Show Completed</span>
+      </label>
       <button
         onClick={() => {
           props.setFilterText('');
           props.setShowOverdue(false);
+          props.setShowCompleted(false);
         }}
         className="bg-muted hover:bg-muted-dark text-white p-3 rounded-lg transition duration-300 ease-in-out cursor-pointer w-full md:w-auto"
       >
@@ -46,3 +57,4 @@ function TaskFilter(props) {
 }
 
 export default TaskFilter;
+```

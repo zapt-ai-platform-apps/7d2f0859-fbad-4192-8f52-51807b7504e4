@@ -1,3 +1,4 @@
+```jsx
 import { useState } from 'react';
 import useFilteredTasks from './useFilteredTasks';
 
@@ -7,6 +8,7 @@ function useTaskFilterSort(tasks) {
   const [sortField, setSortField] = useState('dueDate');
   const [sortDirection, setSortDirection] = useState('asc');
   const [showOverdue, setShowOverdue] = useState(false);
+  const [showCompleted, setShowCompleted] = useState(false);
 
   const filteredTasks = useFilteredTasks(
     tasks,
@@ -14,7 +16,8 @@ function useTaskFilterSort(tasks) {
     filterField,
     sortField,
     sortDirection,
-    showOverdue
+    showOverdue,
+    showCompleted
   );
 
   const handleSort = (field) => {
@@ -33,6 +36,8 @@ function useTaskFilterSort(tasks) {
     setFilterField,
     showOverdue,
     setShowOverdue,
+    showCompleted,
+    setShowCompleted,
     sortField,
     setSortField,
     sortDirection,
@@ -43,3 +48,4 @@ function useTaskFilterSort(tasks) {
 }
 
 export default useTaskFilterSort;
+```

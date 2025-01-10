@@ -1,3 +1,4 @@
+```jsx
 function generateReportContent(tasks, options = {}) {
   const { logoUrl, customHeader } = options;
   const today = new Date();
@@ -14,7 +15,7 @@ function generateReportContent(tasks, options = {}) {
       <td>${task.project || 'N/A'}</td>
       <td>${task.dueDate ? new Date(task.dueDate).toLocaleDateString('en-GB') : 'N/A'}</td>
       <td>${task.status || 'N/A'}</td>
-      <td>${task.priority || 'N/A'}</td>
+      <td>Priority ${task.priority || 'N/A'}</td>
       <td>${task.taskOwner || 'Unassigned'}</td>
       <td>${task.organisation || 'N/A'}</td>
     </tr>
@@ -46,3 +47,4 @@ function generateReportContent(tasks, options = {}) {
 }
 
 export default generateReportContent;
+```

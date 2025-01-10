@@ -1,6 +1,8 @@
+```jsx
 import React from 'react';
 import { format } from 'date-fns';
 import { supabase } from '../supabaseClient';
+import PriorityDisplay from './PriorityDisplay';
 
 function TaskTableRow(props) {
   const { task, handleEmailTask, emailingTaskId, onEditTask } = props;
@@ -14,7 +16,9 @@ function TaskTableRow(props) {
         {task.dueDate ? format(new Date(task.dueDate), 'dd/MM/yy') : ''}
       </td>
       <td className="border px-4 py-2">{task.status}</td>
-      <td className="border px-4 py-2">{task.priority}</td>
+      <td className="border px-4 py-2">
+        <PriorityDisplay value={task.priority} />
+      </td>
       <td className="border px-4 py-2">{task.taskOwner || 'Unassigned'}</td>
       <td className="border px-4 py-2">{task.organisation}</td>
       <td className="border px-4 py-2 flex space-x-2">
@@ -37,3 +41,4 @@ function TaskTableRow(props) {
 }
 
 export default TaskTableRow;
+```

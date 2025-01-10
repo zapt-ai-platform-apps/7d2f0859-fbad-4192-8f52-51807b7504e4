@@ -1,11 +1,10 @@
+```jsx
 import React from 'react';
 import TaskForm from '../components/TaskForm';
 import { supabase } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
-import useTasks from '../hooks/useTasks';
 
 function CreateTaskPage(props) {
-  const { handleTaskCreated } = useTasks();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -14,6 +13,10 @@ function CreateTaskPage(props) {
   };
 
   const handleBack = () => {
+    navigate('/tasks/view');
+  };
+
+  const handleTaskCreated = () => {
     navigate('/tasks/view');
   };
 
@@ -47,3 +50,4 @@ function CreateTaskPage(props) {
 }
 
 export default CreateTaskPage;
+```
