@@ -39,10 +39,10 @@ function App() {
     <Routes>
       <Route path="/" element={user ? <Navigate to="/tasks/view" /> : <LandingPage />} />
       <Route path="/login" element={user ? <Navigate to="/tasks/view" /> : <LoginPage />} />
-      <Route path="/tasks/view" element={user ? <ViewTasksPage user={user} /> : <Navigate to="/login" />} />
-      <Route path="/tasks/create" element={user ? <CreateTaskPage user={user} /> : <Navigate to="/login" />} />
-      <Route path="/tasks/edit/:id" element={user ? <EditTaskPage user={user} /> : <Navigate to="/login" />} />
-      <Route path="/reports/view" element={user ? <ViewReportsPage user={user} /> : <Navigate to="/login" />} />
+      <Route path="/tasks/view" element={user ? <ViewTasksPage user={user} setUser={setUser} /> : <Navigate to="/login" />} />
+      <Route path="/tasks/create" element={user ? <CreateTaskPage user={user} setUser={setUser} /> : <Navigate to="/login" />} />
+      <Route path="/tasks/edit/:id" element={user ? <EditTaskPage user={user} setUser={setUser} /> : <Navigate to="/login" />} />
+      <Route path="/reports/view" element={user ? <ViewReportsPage user={user} setUser={setUser} /> : <Navigate to="/login" />} />
       <Route path="/settings" element={user ? <SettingsPage user={user} setUser={setUser} /> : <Navigate to="/login" />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
