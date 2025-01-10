@@ -4,6 +4,7 @@ import ReportEditorControls from './ReportEditorControls';
 import useUserSettings from '../hooks/useUserSettings';
 import generateReportContent from '../utils/generateReportContent';
 import printReport from '../utils/printReport';
+import SendReport from './SendReport';
 
 function ReportEditor({ tasks, onSave, saving }) {
   const [columnShading, setColumnShading] = useState(false);
@@ -48,6 +49,7 @@ function ReportEditor({ tasks, onSave, saving }) {
         reportContent={reportContent}
         tasks={tasks}
       />
+      <SendReport tasks={tasks} />
     </div>
   );
 }

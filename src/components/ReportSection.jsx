@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import generateReportContent from '../utils/generateReportContent';
 import ReportEditor from './ReportEditor';
-import SendReport from './SendReport';
 import { supabase } from '../supabaseClient';
 
 function ReportSection(props) {
@@ -9,19 +7,15 @@ function ReportSection(props) {
     tasks,
     showReportEditor,
     setShowReportEditor,
-    reportContent,
-    setReportContent,
   } = props;
 
   const [saving, setSaving] = useState(false);
 
   const handleGenerateReport = () => {
-    const content = generateReportContent(tasks);
-    setReportContent(content);
     setShowReportEditor(true);
   };
 
-  const handleSaveReport = async (content) => {
+  const handleSaveReport = async (reportContent) => {
     setSaving(true);
     try {
       const { data: { session } } = await supabase.auth.getSession();
@@ -31,7 +25,7 @@ function ReportSection(props) {
           'Authorization': `Bearer ${session?.access_token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ reportContent: content }),
+        body: JSON.stringify({ reportContent }),
       });
 
       if (response.ok) {
@@ -66,10 +60,11 @@ function ReportSection(props) {
         )}
       </div>
       {showReportEditor && (
-        <>
-          <ReportEditor reportContent={reportContent} onSave={handleSaveReport} saving={saving} />
-          <SendReport reportContent={reportContent} />
-        </>
+        <ReportEditor
+          tasks={tasks}
+          onSave={handleSaveReport}
+          saving={saving}
+        />
       )}
     </div>
   );

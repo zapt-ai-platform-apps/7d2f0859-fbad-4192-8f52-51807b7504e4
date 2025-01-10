@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import TaskTableHeader from './TaskTableHeader';
 import TaskTableBody from './TaskTableBody';
 import EditTaskForm from './EditTaskForm';
-import { supabase } from '../supabaseClient';
 
 function TaskTable(props) {
   const [emailingTaskId, setEmailingTaskId] = useState(null);
@@ -13,31 +12,8 @@ function TaskTable(props) {
     if (!email) return;
     setEmailingTaskId(taskId);
 
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
     try {
-      const response = await fetch('/api/emailTask', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          taskId: taskId,
-          recipientEmail: email,
-        }),
-      });
-
-      if (response.ok) {
-        alert('Task emailed successfully');
-      } else {
-        const errorData = await response.json();
-        alert('Error emailing task: ' + errorData.error);
-      }
-    } catch (error) {
-      console.error('Error emailing task:', error);
-      alert('Error emailing task');
+      await props.handleEmailTask(taskId, email);
     } finally {
       setEmailingTaskId(null);
     }

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
+import generateReportContent from '../utils/generateReportContent';
 
-function SendReport(props) {
+function SendReport({ tasks }) {
   const [sendingReport, setSendingReport] = useState(false);
   const [recipientEmail, setRecipientEmail] = useState('');
 
@@ -11,7 +12,10 @@ function SendReport(props) {
       return;
     }
     setSendingReport(true);
+
+    const reportContent = generateReportContent(tasks);
     const { data: { session } } = await supabase.auth.getSession();
+
     try {
       const response = await fetch('/api/sendReport', {
         method: 'POST',
@@ -20,8 +24,8 @@ function SendReport(props) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          reportContent: props.reportContent,
-          recipientEmail: recipientEmail,
+          reportContent,
+          recipientEmail,
         }),
       });
 

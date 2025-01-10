@@ -12,12 +12,13 @@ function TaskList(props) {
     setFilterField,
     showOverdue,
     setShowOverdue,
+    showCompleted,
+    setShowCompleted,
     filteredTasks,
     handleSort,
   } = useTaskFilterSort(props.tasks);
 
   const [showReportEditor, setShowReportEditor] = useState(false);
-  const [reportContent, setReportContent] = useState('');
 
   return (
     <div>
@@ -28,13 +29,13 @@ function TaskList(props) {
         setFilterField={setFilterField}
         showOverdue={showOverdue}
         setShowOverdue={setShowOverdue}
+        showCompleted={showCompleted}
+        setShowCompleted={setShowCompleted}
       />
       <ReportSection
         tasks={filteredTasks}
         showReportEditor={showReportEditor}
         setShowReportEditor={setShowReportEditor}
-        reportContent={reportContent}
-        setReportContent={setReportContent}
       />
       {!showReportEditor && (
         <TaskTable
