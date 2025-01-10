@@ -1,6 +1,6 @@
 import { saveAs } from 'file-saver';
 import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell } from 'docx';
-import XLSX from 'xlsx';
+import * as XLSX from 'xlsx';
 
 export function exportToWord(reportContent, fileName = 'report.docx') {
   const doc = new Document();
