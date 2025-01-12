@@ -1,8 +1,17 @@
 import { supabase } from '../supabaseClient';
 
-export const handleEmailTask = async (taskId, email) => {
-  console.info('[handleEmailTask] Sending email for taskId:', taskId, 'to:', email);
+export const handleEmailTask = async (taskId) => {
+  console.info('[handleEmailTask] Initiating email for taskId:', taskId);
+
   try {
+    const recipientEmail = prompt('Enter recipient email:');
+    if (!recipientEmail) return;
+
+    const senderEmail = prompt('Enter your email address:');
+    if (!senderEmail) return;
+
+    const comments = prompt('Enter optional comments:') || '';
+
     const {
       data: { session },
     } = await supabase.auth.getSession();
@@ -18,7 +27,12 @@ export const handleEmailTask = async (taskId, email) => {
         Authorization: `Bearer ${session.access_token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ taskId, recipientEmail: email }),
+      body: JSON.stringify({
+        taskId,
+        recipientEmail,
+        senderEmail,
+        comments,
+      }),
     });
 
     if (response.ok) {

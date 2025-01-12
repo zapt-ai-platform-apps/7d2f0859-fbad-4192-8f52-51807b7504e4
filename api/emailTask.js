@@ -9,10 +9,14 @@ async function handler(req, res) {
   }
 
   const user = await authenticateUser(req);
-  const { taskId, recipientEmail } = req.body;
+  const { taskId, recipientEmail, senderEmail, comments } = req.body;
 
   if (!taskId || !recipientEmail) {
     return res.status(400).json({ error: 'Task ID and recipient email are required' });
+  }
+
+  if (!senderEmail) {
+    return res.status(400).json({ error: 'Sender email is required' });
   }
 
   // Fetch task
@@ -28,11 +32,11 @@ async function handler(req, res) {
   }
 
   // Prepare email data
-  const emailData = {
-    from: 'no-reply@zapt.ai',
-    to: recipientEmail,
-    subject: `Task Details: ${task.description}`,
-    text: `Here are the details of the task:
+  const emailText = `
+You have been sent a task from ${senderEmail} via the administrate.co.uk system.
+Comments: ${comments || ''}
+
+Here are the task details:
 
 Reference Number: ${task.referenceNumber}
 Description: ${task.description}
@@ -42,8 +46,13 @@ Status: ${task.status || 'N/A'}
 Priority: ${task.priority || 'N/A'}
 Organisation: ${task.organisation || 'N/A'}
 Task Owner: ${task.taskOwner || 'N/A'}
+  `;
 
-Please contact the task owner for more details.`,
+  const emailData = {
+    from: 'no-reply@zapt.ai',
+    to: recipientEmail,
+    subject: `Task Details: ${task.description}`,
+    text: emailText,
   };
 
   // Send email
