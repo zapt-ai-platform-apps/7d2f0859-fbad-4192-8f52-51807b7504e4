@@ -4,20 +4,7 @@ import TaskTableBody from './TaskTableBody';
 import EditTaskForm from './EditTaskForm';
 
 function TaskTable(props) {
-  const [emailingTaskId, setEmailingTaskId] = useState(null);
   const [editingTask, setEditingTask] = useState(null);
-
-  const handleEmailTask = async (taskId) => {
-    const email = prompt('Enter recipient email:');
-    if (!email) return;
-    setEmailingTaskId(taskId);
-
-    try {
-      await props.handleEmailTask(taskId, email);
-    } finally {
-      setEmailingTaskId(null);
-    }
-  };
 
   const handleEditTask = (task) => {
     setEditingTask(task);
@@ -52,8 +39,6 @@ function TaskTable(props) {
           <TaskTableBody
             loading={props.loading}
             tasks={props.tasks}
-            handleEmailTask={handleEmailTask}
-            emailingTaskId={emailingTaskId}
             onEditTask={handleEditTask}
           />
         </table>

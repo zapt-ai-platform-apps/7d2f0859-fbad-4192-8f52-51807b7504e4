@@ -9,8 +9,6 @@ function TaskTableBody(props) {
           <TaskTableRow
             key={task.id}
             task={task}
-            handleEmailTask={props.handleEmailTask}
-            emailingTaskId={props.emailingTaskId}
             onEditTask={props.onEditTask}
           />
         ))
