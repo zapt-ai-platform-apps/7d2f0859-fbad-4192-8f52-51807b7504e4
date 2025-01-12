@@ -3,6 +3,7 @@ import useTaskFilterSort from '../hooks/useTaskFilterSort';
 import TaskFilter from './TaskFilter';
 import TaskTable from './TaskTable';
 import ReportSection from './ReportSection';
+import { handleEmailTask } from '../utils/emailTask';
 
 function TaskList(props) {
   const {
@@ -45,6 +46,7 @@ function TaskList(props) {
           fetchTasks={props.fetchTasks}
           onTaskUpdated={props.onTaskUpdated}
           onTaskDeleted={props.onTaskDeleted}
+          handleEmailTask={handleEmailTask}
         />
       )}
     </div>
