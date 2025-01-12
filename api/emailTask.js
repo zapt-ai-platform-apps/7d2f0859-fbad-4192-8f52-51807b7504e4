@@ -11,12 +11,8 @@ async function handler(req, res) {
   const user = await authenticateUser(req);
   const { taskId, recipientEmail, senderEmail, comments } = req.body;
 
-  if (!taskId || !recipientEmail) {
-    return res.status(400).json({ error: 'Task ID and recipient email are required' });
-  }
-
-  if (!senderEmail) {
-    return res.status(400).json({ error: 'Sender email is required' });
+  if (!taskId || !recipientEmail || !senderEmail) {
+    return res.status(400).json({ error: 'Task ID, recipient email, and sender email are required' });
   }
 
   // Fetch task
@@ -50,7 +46,8 @@ Task Owner: ${task.taskOwner || 'N/A'}
 
   const emailData = {
     from: 'no-reply@zapt.ai',
-    to: recipientEmail,
+    to: [recipientEmail],
+    cc: [senderEmail],
     subject: `Task Details: ${task.description}`,
     text: emailText,
   };
