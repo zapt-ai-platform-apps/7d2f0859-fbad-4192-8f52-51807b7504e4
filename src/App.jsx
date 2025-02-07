@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import LandingPage from './pages/LandingPage';
-import CreateTaskPage from './pages/CreateTaskPage';
-import ViewTasksPage from './pages/ViewTasksPage';
-import EditTaskPage from './pages/EditTaskPage';
-import ViewReportsPage from './pages/ViewReportsPage';
-import SettingsPage from './pages/SettingsPage';
-import UsersPage from './pages/UsersPage';
+import LoginPage from './features/auth/pages/LoginPage';
+import LandingPage from './features/auth/pages/LandingPage';
+import CreateTaskPage from './features/tasks/pages/CreateTaskPage';
+import ViewTasksPage from './features/tasks/pages/ViewTasksPage';
+import EditTaskPage from './features/tasks/pages/EditTaskPage';
+import ViewReportsPage from './features/reports/pages/ViewReportsPage';
+import SettingsPage from './features/settings/pages/SettingsPage';
+import UsersPage from './features/users/pages/UsersPage';
 import { supabase } from './supabaseClient';
 
 function App() {
