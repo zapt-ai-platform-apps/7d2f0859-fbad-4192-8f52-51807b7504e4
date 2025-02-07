@@ -7,6 +7,7 @@ import ViewTasksPage from './pages/ViewTasksPage';
 import EditTaskPage from './pages/EditTaskPage';
 import ViewReportsPage from './pages/ViewReportsPage';
 import SettingsPage from './pages/SettingsPage';
+import UsersPage from './pages/UsersPage';
 import { supabase } from './supabaseClient';
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
       <Route path="/tasks/edit/:id" element={user ? <EditTaskPage user={user} setUser={setUser} /> : <Navigate to="/login" />} />
       <Route path="/reports/view" element={user ? <ViewReportsPage user={user} setUser={setUser} /> : <Navigate to="/login" />} />
       <Route path="/settings" element={user ? <SettingsPage user={user} setUser={setUser} /> : <Navigate to="/login" />} />
+      <Route path="/users/view" element={user ? <UsersPage user={user} setUser={setUser} /> : <Navigate to="/login" />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

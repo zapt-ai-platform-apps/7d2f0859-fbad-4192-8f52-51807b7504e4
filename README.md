@@ -13,10 +13,12 @@ Administrate is designed to help individuals within organizations, particularly 
 7. [Send Report](docs/journeys/send-report.md) - Share the report with specified recipients via email.
 8. [View Saved Reports](docs/journeys/view-saved-reports.md) - Access and view your previously saved reports.
 9. [Delete Task](docs/journeys/delete-task.md) - Remove a task from your task list.
+10. [View Registered Users](docs/journeys/view-registered-users.md) - View a list of all registered users in the application.
 
 ## External API Services Used
 
 - **Resend**: Used for sending emails when tasks or reports are emailed to recipients.
+- **Supabase Admin API**: Used for securely retrieving the list of registered users when needed.
 
 ## Important Notes
 
